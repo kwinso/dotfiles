@@ -1,0 +1,1 @@
+/home/mouse/Dropbox/.config/polybar/launch.sh
