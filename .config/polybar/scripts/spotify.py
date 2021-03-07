@@ -99,7 +99,7 @@ try:
 
     metadata = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
     status = spotify_properties.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')
-
+    
     # Handle play/pause label
 
     play_pause = play_pause.split(',')
@@ -130,7 +130,10 @@ try:
 
         # Add 4 to trunclen to account for status symbol, spaces, and other padding characters
         if status == 'Playing':
-            print(truncate(output.format(artist=artist, song=song, play_pause='', album=album), trunclen + 4))
+            if song == "Advertisement":
+                print(song)
+            else:
+                print(truncate(output.format(artist=artist, song=song, play_pause='', album=album), trunclen + 4))
         else:
             print('')
             
