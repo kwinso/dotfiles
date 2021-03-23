@@ -1,0 +1,8 @@
+{
+    "accessToken": "check readme",
+    "refreshToken": "check readme",
+    "clientId": "Create app on spotify dashboard",
+    "clientSecret": "Create app on spotify dashboard",
+
+    "REMOVE IT": "Rename file to creds.json and remove this line"
+}
