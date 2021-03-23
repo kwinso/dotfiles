@@ -19,17 +19,21 @@ const truncLen = parseInt(process.argv[2]) | 60;
             });
 
         if (data) {
-            const byArtist = data.item.artists[0].name;
-            const song = data.item.name;
-
-            let label = `${byArtist} - ${song}`;
-
-            if (label.length > truncLen) {
-                label = label.substr(0, truncLen);
+            if (data.is_playing) {
+                const byArtist = data.item.artists[0].name;
+                const song = data.item.name;
+    
+                let label = `${byArtist} - ${song}`;
+    
+                if (label.length > truncLen) {
+                    label = label.substr(0, truncLen - 3) + "...";
+                }
+    
+                return console.log(label);
             }
-
-            return console.log(label);
         }
     }
+  // Prints empty line if nothing was printed
+  console.log();
 })();
 
