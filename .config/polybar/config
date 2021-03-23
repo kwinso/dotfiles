@@ -205,7 +205,7 @@ interval = 3
 format-prefix = " "
 format = <label>
 format-foreground = ${colors.foreground}
-exec = python ~/.config/polybar/scripts/spotify.py
+exec = /usr/bin/npm run --prefix /home/mouse/.config/polybar/scripts/spotify run --silent
 
 [settings]
 screenchange-reload = true

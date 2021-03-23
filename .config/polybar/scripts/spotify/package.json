@@ -1,0 +1,15 @@
+{
+  "name": "spotify",
+  "version": "1.0.0",
+  "description": "Check Spotify Track playing rn",
+  "main": "spotify.js",
+  "scripts": {
+    "run": "node spotify.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0"
+  }
+}
