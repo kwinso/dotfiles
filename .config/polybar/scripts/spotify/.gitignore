@@ -1,6 +1,0 @@
-.env
-node_modules/
-creds.json
-package-lock.json
-errors.log
-usage.md
