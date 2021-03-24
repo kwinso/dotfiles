@@ -1,4 +1,4 @@
-{
+
   "name": "spotify",
   "version": "1.0.0",
   "description": "Check Spotify Track playing rn",
@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
-    "dotenv": "^8.2.0",
-    "spotify-web-api-node": "^5.0.2"
+    "axios": "^0.21.1"
   }
 }
