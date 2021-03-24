@@ -5,47 +5,55 @@ const fs = require("fs");
 const truncLen = parseInt(process.argv[2]) || 60;
 
 const credsFile = fs.readFileSync(path.join(__dirname, "./creds.json"));
-let { accessToken, refreshToken, clientId, clientSecret } = JSON.parse(credsFile);
 
+let { accessToken, refreshToken, clientId, clientSecret } = JSON.parse(credsFile);
+let output = "";
+let nextSongCheck = 0;
 
 setInterval(async () => {
+    let oldOutput = output;
     try {
-        const { data } = await axios.get(
-            "https://api.spotify.com/v1/me/player/currently-playing",
-            {
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${accessToken}`
-                },
-            }
-        );
+        if (Date.now() > nextSongCheck) {
+            const { data, status } = await axios.get(
+                "https://api.spotify.com/v1/me/player/currently-playing",
+                {
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${accessToken}`
+                    },
+                }
+            );
 
-        if (data) {
-            if (data.is_playing) {
+            output = ""
+            if (data && data.is_playing) {
                 const byArtist = data.item.artists[0].name;
                 const song = data.item.name;
 
-                let label = `${byArtist} - ${song}`;
+                output = `${byArtist} - ${song}`;
 
-                if (label.length > truncLen) {
-                    label = label.substr(0, truncLen - 3) + "...";
-                }
-
-                return console.log(label);
+                if (output.length > truncLen)
+                    output = output.substr(0, truncLen - 3) + "...";
+            }
+            
+            // API sends 204 if there's no content, so script will check a little bit later to decrease
+            // requests amount and update output
+            if (status == 204) {
+                // Check again for song 10 seconds later
+                nextSongCheck = Date.now() + 1000 * 10;
             }
         }
-        // Prints empty line if nothing was printed
-        console.log();
     } catch (e) {
-        if (e.response && e.response.status == 400) {
+        if (e.response && (e.response.status == 400 || e.response.status == 401)) {
             await getNewAccessToken();
         } else {
-            console.log("Error getting current song.")
+            output = "Error getting current song.";
             saveError(e);
         }
     }
 
+    if (output != oldOutput)
+        console.log(output);
 }, 5000);
 
 
@@ -64,7 +72,7 @@ async function getNewAccessToken() {
         saveAccessToken(data.access_token);
     } catch (e) {
         saveError(e);
-        console.log("Error getting new access token.");
+        output = "Error getting new access token.";
     }
 
 }
@@ -79,11 +87,14 @@ function saveAccessToken(newAccessToken) {
                 refreshToken,
                 clientId,
                 clientSecret
-            }
+            },
+            null,
+            4 // Formatting
         )
-    )
+    );
 }
 
 function saveError(e) {
-    fs.writeFileSync(path.join(__dirname, "./errors.log"), e + "\n======", { flag: "a" });
+    const errMsg = `Error Date: ${new Date().toString()}\nError:\n${JSON.stringify(e, null, 4)}\n==============\n`;
+    fs.writeFileSync(path.join(__dirname, "./errors.log"), errMsg, { flag: "a" });
 }
