@@ -35,7 +35,7 @@ setInterval(async () => {
                 if (output.length > truncLen)
                     output = output.substr(0, truncLen - 3) + "...";
             }
-            
+
             // API sends 204 if there's no content, so script will check a little bit later to decrease
             // requests amount and update output
             if (status == 204) {
@@ -44,12 +44,21 @@ setInterval(async () => {
             }
         }
     } catch (e) {
-        if (e.response && (e.response.status == 400 || e.response.status == 401)) {
-            await getNewAccessToken();
-        } else {
-            output = "Error getting current song.";
+        output = "Error getting current song.";
+        if (e.response) {
+            const status = e.response.status;
+            output = "Error with API";
+
+            if (status == 401 || status == 400) {
+                output = "Refresing Access Token"
+                await getNewAccessToken();
+            } else if (status == 503)
+                output = "API Timeout...";
+            else
+                saveError(e);
+
+        } else
             saveError(e);
-        }
     }
 
     if (output != oldOutput)
