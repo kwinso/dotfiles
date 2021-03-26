@@ -26,6 +26,7 @@ setInterval(async () => {
             );
 
             output = ""
+            
             if (data && data.is_playing) {
                 const byArtist = data.item.artists[0].name;
                 const song = data.item.name;
@@ -33,7 +34,7 @@ setInterval(async () => {
                 output = `${byArtist} - ${song}`;
 
                 if (output.length > truncLen)
-                    output = output.substr(0, truncLen - 3) + "...";
+                    output = output.substr(0, truncLen - 3).trim() + "...";
             }
 
             // API sends 204 if there's no content, so script will check a little bit later to decrease
