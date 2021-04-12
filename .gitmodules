@@ -1,0 +1,3 @@
+[submodule ".config/polybar/scripts/spotify"]
+	path = .config/polybar/scripts/spotify
+	url = https://github.com/uwumouse/spotify-current-song.git
