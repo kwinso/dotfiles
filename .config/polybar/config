@@ -2,7 +2,7 @@
 ;background = ${xrdb:color0:#222}
 background = #151515
 background-alt = #272727
-foreground = #7b4eed
+foreground = #0377ad
 foreground-alt = #eafe48  
 primary = #7b4eed
 secondary = #7b4eed
@@ -16,7 +16,6 @@ fixed-center = true
 padding-right = 3
 background = ${colors.background}
 foreground = ${colors.foreground}
-separator = "|"
 
 line-size = 1
 line-color = #f00
@@ -28,14 +27,24 @@ module-margin-left = 1
 module-margin-right = 2
 
 
+tray-position = right
+tray-padding = 5
+tray-scale = 1
+
+tray-background = ${root.background}
+
+tray-offset-x = 0
+tray-offset-y = 0
+tray-maxsize = 16
+
 font-0 = Nova Mono:size=11;2
 font-1 = Font Awesome 5 Free Regular:size=9;2
 font-2 = Font Awesome 5 Free Solid:size=9;2
 font-3 = Font Awesome 5 Brands:size=9;2
 font-4 = siji:pixelsize=10;1
 
-# modules-center = spotify
-modules-right = vpn_ip cpu  memory 
+modules-left = i3
+modules-center = spotify
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -53,6 +62,8 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 line-size = 1
 line-color = #f00
+padding = 2
+padding-left = 1
 
 border-size = 0
 border-color = ${colors.black}
@@ -66,19 +77,8 @@ font-2 = Font Awesome 5 Free Solid:size=9;2
 font-3 = Font Awesome 5 Brands:size=9;2
 font-4 = siji:pixelsize=9;1
 
-modules-left = i3
-modules-center = spotify
-modules-right =  xkeyboard alsa date
-
-tray-position = right
-tray-padding = 5
-tray-scale = 1
-
-tray-background = ${root.background}
-
-tray-offset-x = 0
-tray-offset-y = 0
-tray-maxsize = 16
+modules-left =  cpu memory 
+modules-right = xkeyboard alsa date 
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -201,23 +201,15 @@ format =  <label>
 
 [module/spotify]
 type = custom/script
-interval = 3
 format-prefix = " "
 format = <label>
 format-foreground = ${colors.foreground}
-exec = /usr/bin/npm run --prefix /home/mouse/.config/polybar/scripts/spotify run --silent
+exec = /usr/bin/npm run --prefix /home/mouse/.config/polybar/scripts/spotify track --silent 55
+tail = true
+click-left = /usr/bin/npm run --prefix /home/mouse/.config/polybar/scripts/spotify listenning
 
 [settings]
 screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-;pseudo-transparency = false
-
 [global/wm]
 margin-top = 0
 margin-bottom = 0
-
-; vim:ft=dosini
-

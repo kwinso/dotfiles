@@ -17,7 +17,7 @@ floating_modifier $mod
 
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
-# i3 BINDINS
+# i3 BINDINGS
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 
 # start a terminal
@@ -110,12 +110,17 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-
+# +=+=+=+=+=+=+=+=+=+=+=+=+
+# i3 gaps 
+# +=+=+=+=+=+=+=+=+=+=+=+=+
+for_window [class=".*"] gaps inner all set 5
+for_window [class="polybar"] gaps outer current set 10
+smart_gaps on
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # i3 WM Restart & Reload & Exit
 # +=+=+=+=+=+=+=+=+=+=+=+=+
-#
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -158,7 +163,7 @@ bindsym $mod+r mode "resize"
 
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+=+=
-# Window colors & border
+# Window config / colors & border
 # +=+=+=+=+=+=+=+=+=+=+=+=+=+=
 
 client.focused          #545454 #545454    #ffffff #545454   #545454c
@@ -168,15 +173,14 @@ client.urgent           #2f343a #900000    #ffffff #900000   #900000
 client.background       #ffffff
 
 for_window [class="^.*"] border pixel 0
-# for_window [class="kitty"] border pixel 1; hide_edge_borders horizontal
-
+for_window [class="Gnome-calculator"] floating toggle
 # +=+=+=+=+=+=+=+=+=+=+=+=+=+=
 # Attach windows to workspaces 
 # +=+=+=+=+=+=+=+=+=+=+=+=+=+=
 
 for_window [class="firefox"] move to workspace $ws1
-for_window [class="discord"] move to workspace $ws9; layout tabbed
-for_window [class="TelegramDesktop"] move to workspace $ws9; layout tabbed
+for_window [class="discord"] move to workspace $ws9
+for_window [class="TelegramDesktop"] move to workspace $ws9
 for_window [class="Spotify"] move to workspace $ws10
 for_window [class="Code"] move to workspace $ws3
 
@@ -191,7 +195,7 @@ exec setxkbmap -layout "us, ru" -option "grp:alt_shift_toggle"
 exec xinput set-prop 13 "libinput Tapping Enabled" 1 
 
 # Setting wallpaper
-exec_always  feh --bg-scale /home/mouse/Pictures/space
+exec_always  feh --bg-scale /home/mouse/Pictures/cyberpunk.png
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Media Controls Setup
@@ -208,6 +212,9 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
+# Brightness
+bindsym XF86MonBrightnessUp exec brightnessctl s 10%+ # increase
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%- # descrease
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Startup
@@ -216,6 +223,7 @@ exec --no-startup-id dropbox
 exec --no-startup-id flameshot
 exec --no-startup-id telegram-desktop
 exec --no-startup-id conky -c ~/.config/conky/conky.conf
+exec_always --no-startup-id picom --config ~/.config/picom.conf
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # User Binds
