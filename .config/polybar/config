@@ -77,7 +77,7 @@ font-2 = Font Awesome 5 Free Solid:size=9;2
 font-3 = Font Awesome 5 Brands:size=9;2
 font-4 = siji:pixelsize=9;1
 
-modules-left =  cpu memory 
+modules-left =  cpu memory vpn_ip
 modules-right = xkeyboard alsa date 
 
 cursor-click = pointer
@@ -154,17 +154,14 @@ label =  %percentage_used%%
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1 
 
-date =
-date-alt = " %Y-%m-%d"
-
-time = %H:%M
-time-alt = %H:%M:%S
+date = %d.%m
+time = %H:%M:%S
 
 format-prefix-foreground = ${colors.foreground-alt}
 
-label =  %date% %time%
+label =  %date% | %time%
 
 [module/alsa]
 type = internal/alsa

@@ -230,7 +230,9 @@ exec_always --no-startup-id picom --config ~/.config/picom.conf
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 
 # Rofi system laucher startup 
-bindsym $mod+d exec rofi -theme android_notification  -modi drun -show drun -show-icons -widht 50 -lines 30 -scroll-method 1
+bindsym $mod+d exec rofi -theme android_notification -modi drun -show drun -show-icons -widht 50 -lines 30 -scroll-method 1
+# Run programs as root with rofi 
+bindsym $mod+Shift+d exec --no-startup-id "rofi -theme android_notification -modi drun -show drun -show-icons -widht 50 -lines 30 -scroll-method 1  run-command 'gksu {cmd}'"
 # Screenshots
 bindsym Print exec flameshot gui
 
