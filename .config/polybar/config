@@ -201,7 +201,7 @@ type = custom/script
 format-prefix = " "
 format = <label>
 format-foreground = ${colors.foreground}
-exec = /usr/bin/npm run --prefix /home/mouse/.config/polybar/scripts/spotify track --silent 55
+exec = /usr/bin/npm run --prefix /home/mouse/.config/polybar/scripts/spotify --silent track 3 55
 tail = true
 click-left = /usr/bin/npm run --prefix /home/mouse/.config/polybar/scripts/spotify listenning
 
