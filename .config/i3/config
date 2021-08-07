@@ -21,7 +21,7 @@ floating_modifier $mod
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 
 # start a terminal
-bindsym $mod+Return exec kitty 
+bindsym $mod+Return exec terminator 
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -173,6 +173,7 @@ client.urgent           #2f343a #900000    #ffffff #900000   #900000
 client.background       #ffffff
 
 for_window [class="^.*"] border pixel 0
+for_window [class="eva-player"] floating toggle
 for_window [class="Gnome-calculator"] floating toggle
 # +=+=+=+=+=+=+=+=+=+=+=+=+=+=
 # Attach windows to workspaces 
@@ -192,10 +193,10 @@ for_window [class="Code"] move to workspace $ws3
 exec setxkbmap -layout "us, ru" -option "grp:alt_shift_toggle"
 
 # enabling tapping on touchpad
-exec xinput set-prop 13 "libinput Tapping Enabled" 1 
+exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1 
 
 # Setting wallpaper
-exec_always  feh --bg-scale /home/mouse/Pictures/cyberpunk.png
+exec_always  feh --bg-scale /home/mouse/Pictures/unix.jpg
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Media Controls Setup
@@ -223,7 +224,6 @@ exec --no-startup-id dropbox
 exec --no-startup-id flameshot
 exec --no-startup-id telegram-desktop
 exec --no-startup-id conky -c ~/.config/conky/conky.conf
-exec_always --no-startup-id picom --config ~/.config/picom.conf
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # User Binds
