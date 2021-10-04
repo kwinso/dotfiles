@@ -114,11 +114,12 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # i3 gaps 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
-for_window [class=".*"] gaps inner all set 5
 for_window [class="polybar"] gaps outer current set 10
+gaps inner 10
 smart_gaps on
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
@@ -176,7 +177,7 @@ client.unfocused        #333333 #222222    #888888 #292d2e   #222222
 client.urgent           #2f343a #900000    #ffffff #900000   #900000
 client.background       #ffffff
 
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 0 
 
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+=+=
@@ -235,7 +236,6 @@ exec --no-startup-id dropbox
 exec --no-startup-id flameshot
 exec --no-startup-id telegram-desktop
 exec --no-startup-id conky -c ~/.config/conky/conky.conf
-exec --no-startup-id picom
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # User Binds
 # +=+=+=+=+=+=+=+=+=+=+=+=+
