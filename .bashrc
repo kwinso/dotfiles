@@ -12,12 +12,12 @@ force_color_prompt=yes
 
 alias grep="grep --color=auto"
 
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
 alias gaa="git add ."
 alias gcm="git commit -m"
 alias gpo="git push -u origin"
+
+# Own Path
+# export PATH=$PATH:/home/mouse/code/bins/
 
 # CTF Vars
 export CTF_ROOT="/home/mouse/ctf"
@@ -27,3 +27,5 @@ export THM="$CTF_ROOT/thm"
 alias htbd="cd $HTB"
 alias thmd="cd $THM"
 alias vpn="sudo openvpn"
+
+alias l="ls -la"
