@@ -29,3 +29,5 @@ alias thmd="cd $THM"
 alias vpn="sudo openvpn"
 
 alias l="ls -la"
+
+export TERMINAL="kitty"
