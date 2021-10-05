@@ -39,9 +39,10 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 
+" Searching in project files
+Plug 'dyng/ctrlsf.vim'
 
 call plug#end()
-
 
 " colorscheme gruvbox
 " colorscheme OceanicNext
@@ -58,8 +59,6 @@ endif
 " variants: mirage, dark, dark
 let ayucolor="dark"
 colorscheme ayu
-
-
 
 " turn off search highlight
 nnoremap ,<space> :nohlsearch<CR>
@@ -86,6 +85,18 @@ let g:NERDTreeGitStatusWithFlags = 1
 
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Searching configuration
+let g:ctrlsf_extra_backend_args = {
+    \ 'ack': '--ignore-dir=node_modules --ignore-dir=target' 
+    \ }
+
+nmap     <C-F>s <Plug>CtrlSFPrompt
+nmap     <C-F>f :NERDTreeFind 
+vmap     <C-F>f <Plug>CtrlSFVwordPath
+nnoremap <C-F>o :CtrlSFOpen<CR>
+nnoremap <C-F>t :CtrlSFToggle<CR>
+inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 lua << EOF
 
 -- Set completeopt to have a better completion experience
@@ -140,11 +151,8 @@ cmp.setup {
   },
 }
 EOF
-
-
-
-
 lua << EOF
+
 local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys
