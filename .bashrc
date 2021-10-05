@@ -31,3 +31,4 @@ alias vpn="sudo openvpn"
 alias l="ls -la"
 
 export TERMINAL="kitty"
+set -o vi
