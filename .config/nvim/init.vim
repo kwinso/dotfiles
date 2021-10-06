@@ -42,7 +42,15 @@ Plug 'maxmellon/vim-jsx-pretty'
 " Searching in project files
 Plug 'dyng/ctrlsf.vim'
 
+" Formatting
+Plug 'mhartington/formatter.nvim'
+
+
 call plug#end()
+
+" Format 
+nnoremap <silent> <leader>f :Format<CR>
+
 
 " colorscheme gruvbox
 " colorscheme OceanicNext
@@ -97,7 +105,37 @@ vmap     <C-F>f <Plug>CtrlSFVwordPath
 nnoremap <C-F>o :CtrlSFOpen<CR>
 nnoremap <C-F>t :CtrlSFToggle<CR>
 inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
+" tab indentaion
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+
 lua << EOF
+require('formatter').setup({
+  filetype = {
+    rust = {
+      -- Rustfmt
+      function()
+        return {
+          exe = "rustfmt",
+          args = {"--emit=stdout"},
+          stdin = true
+        }
+      end
+    },
+  }
+})
+-- Format file on save
+vim.api.nvim_exec([[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.js,*.rs FormatWrite
+augroup END
+]], true)
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -150,7 +188,11 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
 EOF
+" Setup formatting 
+nnoremap <silent> <leader>f :Format<CR>
+
 lua << EOF
 
 local nvim_lsp = require('lspconfig')
