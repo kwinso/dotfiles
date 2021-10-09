@@ -130,12 +130,12 @@ require('formatter').setup({
   }
 })
 -- Format file on save
-vim.api.nvim_exec([[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost *.js,*.rs FormatWrite
-augroup END
-]], true)
+-- vim.api.nvim_exec([[
+-- augroup FormatAutogroup
+--   autocmd!
+--   autocmd BufWritePost *.js,*.rs FormatWrite
+-- augroup END
+-- ]], true)
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
