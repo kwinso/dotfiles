@@ -63,11 +63,7 @@ tray-offset-x = 0
 tray-offset-y = 0
 tray-maxsize = 16
 
-font-0 = JetBrainsMono Nerd Font:size=11;2
-font-1 = JetBrainsMono Nerd Font Regular:size=9;2
-font-2 = JetBrainsMono Nerd Font Solid:size=9;2
-font-3 = JetBrainsMono Nerd Font Regular:size=9;2
-font-4 = JetBrainsMono Nerd Font Regular:pixelsize=10;1
+font-0 = JetBrains Mono Nerd Font:size=11;1
 
 modules-center = i3
 ; modules-center = spotify
