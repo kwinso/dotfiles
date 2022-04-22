@@ -28,11 +28,15 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 
-Plug 'christoomey/vim-tmux-navigator'
+" Airline 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
+
 " color schemas
-Plug 'morhetz/gruvbox'  " colorscheme gruvbox
-Plug 'mhartington/oceanic-next'  " colorscheme OceanicNext
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+" Plug 'morhetz/gruvbox'  " colorscheme gruvbox
+" Plug 'mhartington/oceanic-next'  " colorscheme OceanicNext
+" Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'ayu-theme/ayu-vim'
 
 " For JS/JSX
@@ -48,8 +52,14 @@ Plug 'mhartington/formatter.nvim'
 
 call plug#end()
 
+
+" Airline config
+let g:airline_powerline_fonts = 1
+let g:airline_theme = "ayu_dark"
+
+
 " Format 
-nnoremap <silent> <leader>f :Format<CR>
+nnoremap <leader>f :Format<CR>
 
 
 " colorscheme gruvbox
@@ -105,6 +115,7 @@ vmap     <C-F>f <Plug>CtrlSFVwordPath
 nnoremap <C-F>o :CtrlSFOpen<CR>
 nnoremap <C-F>t :CtrlSFToggle<CR>
 inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
 
 " tab indentaion
 nnoremap <Tab> >>_
@@ -190,8 +201,6 @@ cmp.setup {
 }
 
 EOF
-" Setup formatting 
-nnoremap <silent> <leader>f :Format<CR>
 
 lua << EOF
 
