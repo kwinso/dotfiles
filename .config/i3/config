@@ -118,9 +118,9 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # i3 gaps 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
-for_window [class="polybar"] gaps outer current set 10
 gaps inner 10
-smart_gaps on
+gaps outer -6
+
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # i3 WM Restart & Reload & Exit
@@ -207,7 +207,7 @@ exec setxkbmap -layout "us, ru" -option "grp:alt_shift_toggle"
 exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1 
 
 # Setting wallpaper
-exec_always  feh --bg-scale /home/mouse/Pictures/mountain.png
+exec_always  feh --bg-scale /home/mouse/Pictures/la_night.png
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Media Controls Setup
@@ -231,6 +231,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%- # descrease
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Startup
 # +=+=+=+=+=+=+=+=+=+=+=+=+
+exec --no-startup-id permid # Discord intergration for web services
 exec --no-startup-id copyq
 exec --no-startup-id dropbox
 exec --no-startup-id flameshot
