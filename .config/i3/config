@@ -241,10 +241,8 @@ exec --no-startup-id conky -c ~/.config/conky/conky.conf
 # User Binds
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 
-# Rofi system laucher startup 
-bindsym $mod+d exec rofi -theme Monokai -modi drun -show drun -show-icons -widht 50 -lines 25 -scroll-method 1
-# Run programs as root with rofi 
-bindsym $mod+Shift+d exec --no-startup-id "rofi -theme solarized -modi drun -show drun -show-icons -widht 50 -lines 25 -scroll-method 1  run-command 'gksu {cmd}'"
+# ROFI
+bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 # Screenshots
 bindsym Print exec flameshot gui
 

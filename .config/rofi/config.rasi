@@ -1,4 +1,3 @@
-/* This file was dumped using "rofi -dump-config" command */
 
 configuration {
 /*	modi: "window,run,ssh";*/
@@ -147,3 +146,5 @@ configuration {
       sorting-method:    "name";
   }
 }
+
+@theme "~/.config/rofi/theme.rasi"
