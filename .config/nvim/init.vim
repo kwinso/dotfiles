@@ -22,8 +22,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'Mofiqul/dracula.nvim'
 
 " Status Line
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+Plug 'josa42/vim-lightline-coc'
 
 " TS Syntax
 Plug 'HerringtonDarkholme/yats.vim' 
@@ -34,9 +34,34 @@ call plug#end()
 " TODO:
 " 1. + Update colors for CocFloating 
 " 2. + Switch from NERDTree to Nvim Tree
-" 3. Switch from Airline to Lightline 
+" 3. + Switch from Airline to Lightline 
+" 5. Switch BarBar to Bufferline
 " 4. Organaize this config
+"
 
+" ###############
+" # => Theme    #
+" ###############
+colorscheme dracula
+hi CocFloating guibg=#21222C
+
+" #################
+" # => StatusLine #
+" #################
+set laststatus=3
+if !has('gui_running')
+  set t_Co=256
+endif
+set noshowmode
+let g:lightline = {
+  \   'colorscheme': 'dracula',
+  \   'active': {
+  \     'left': [[  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
+  \   }
+  \ }
+
+" register compoments:
+call lightline#coc#register()
 
 " ###############
 " # => NvimTree #
@@ -165,15 +190,6 @@ if (has('termguicolors'))
 	set termguicolors
 endif
 
-colorscheme dracula
-hi CocFloating guibg=#21222C
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_powerline_fonts = 1
-
-set laststatus=3
 
 " coc config
 let g:coc_global_extensions = [
