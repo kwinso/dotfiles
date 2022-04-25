@@ -2,41 +2,112 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdtree'
 "Plug 'tsony-tsonev/nerdtree-git-plugin'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'kyazdani42/nvim-tree.lua'
+
+" ICONS
 Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
+
+" Productivity
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'scrooloose/nerdcommenter'
-
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'Chiel92/vim-autoformat'
-
-Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 Plug 'christoomey/vim-tmux-navigator'
 
-"Plug 'morhetz/gruvbox'
+" THEME
 Plug 'Mofiqul/dracula.nvim'
-Plug 'itchyny/lightline.vim'
-"Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-"Plug 'nanotech/jellybeans.vim'
-"Plug 'ayu-theme/ayu-vim'
 
-" Airline
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
+" Status Line
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-
-Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+" TS Syntax
+Plug 'HerringtonDarkholme/yats.vim' 
 
 " Initialize plugin system
 call plug#end()
 
+" TODO:
+" 1. + Update colors for CocFloating 
+" 2. + Switch from NERDTree to Nvim Tree
+" 3. Switch from Airline to Lightline 
+" 4. Organaize this config
+
+
+" ###############
+" # => NvimTree #
+" ###############
+
+lua << EOF
+require'nvim-tree'.setup {
+  actions = {
+    view = { 
+      side = "left",
+      },
+    open_file = {
+      resize_window = true
+      }
+    },
+   filters = {
+    dotfiles = false,
+    custom = { '.git'},
+    exclude = {},
+  },
+}
+EOF
+let g:nvim_tree_git_hl = 1 
+let g:nvim_tree_highlight_opened_files = 0 
+let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
+let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
+let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
+let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
+let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target. let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
+let g:nvim_tree_create_in_closed_folder = 1 "0 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
+let g:nvim_tree_special_files = { 'README.md': 1, 'Cargo.toml': 1,  } " List of filenames that gets highlighted with NvimTreeSpecialFile
+" default will show icon by default if no icon is provided
+" default shows no icon by default
+let g:nvim_tree_icons = {
+    \ 'default': "",
+    \ 'symlink': "",
+    \ 'git': {
+    \   'unstaged': "✗",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': "➜",
+    \   'untracked': "★",
+    \   'deleted': "",
+    \   'ignored': "◌"
+    \   },
+    \ 'folder': {
+    \   'arrow_open': "",
+    \   'arrow_closed': "",
+    \   'default': "",
+    \   'open': "",
+    \   'empty': "",
+    \   'empty_open': "",
+    \   'symlink': "",
+    \   'symlink_open': "",
+    \   }
+    \ }
+
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+
+" open Explorer automatically
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * NvimTreeOpen
+
+" Put newly opened windows to the right (to avoid putting nvim-tree to the right while resizing)
+set splitright 
+
+
+
 inoremap jk <ESC>
-nmap <C-n> :NERDTreeToggle<CR>
 vmap <C-_> <plug>NERDCommenterToggle
 nmap <C-_> <plug>NERDCommenterToggle
 set mouse+=a
@@ -62,30 +133,6 @@ nnoremap <silent>    <A-9> :BufferLast<CR>
 nnoremap <silent>    <A-p> :BufferPin<CR>
 " Close buffer
 nnoremap <silent>    <A-c> :BufferClose<CR>
-" Wipeout buffer
-
-" open NERDTree automatically
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree
-
-let g:NERDTreeGitStatusWithFlags = 1
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-"let g:NERDTreeGitStatusNodeColorization = 1
-"let g:NERDTreeColorMapCustom = {
-      "\ "Staged"    : "#0ee375",
-      "\ "Modified"  : "#d9bf91",
-      "\ "Renamed"   : "#51C9FC",
-      "\ "Untracked" : "#FCE77C",
-      "\ "Unmerged"  : "#FC51E6",
-      "\ "Dirty"     : "#FFBD61",
-      "\ "Clean"     : "#87939A",
-      "\ "Ignored"   : "#808080"
-      "\ }
-
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-let g:NERDTreeIgnore = ['^node_modules$']
 
 " vim-prettier
 "let g:prettier#quickfix_enabled = 0
@@ -114,44 +161,19 @@ set shiftwidth=2
 " always uses spaces instead of tab characters
 set expandtab
 
-
-"if exists('+termguicolors')
-"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
-"endif
+if (has('termguicolors'))
+	set termguicolors
+endif
 
 colorscheme dracula
+hi CocFloating guibg=#21222C
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1
 
-" The lightline.vim theme
-let g:lightline = {
-      \ 'colorscheme': 'darcula',
-     \ }
-
-" Always show statusline
-set laststatus=2
-
-" Uncomment to prevent non-normal modes showing in powerline and below powerline.
-set noshowmode
-
-
-" sync open file with NERDTree
-" " Check if NERDTree is open or active
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-
-" Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
+set laststatus=3
 
 " coc config
 let g:coc_global_extensions = [
@@ -164,7 +186,10 @@ let g:coc_global_extensions = [
       \ ]
 " from readme
 " if hidden is not set, TextEdit might fail.
-set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
+set hidden 
+" Some servers have issues with backup files, see #649 set nobackup set nowritebackup 
+" Better display for messages set cmdheight=2 
+" You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 
 " don't give |ins-completion-menu| messages.
