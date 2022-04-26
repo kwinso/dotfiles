@@ -17,6 +17,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'Chiel92/vim-autoformat'
 Plug 'romgrk/barbar.nvim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'ap/vim-css-color'
 
 " THEME
 Plug 'Mofiqul/dracula.nvim'

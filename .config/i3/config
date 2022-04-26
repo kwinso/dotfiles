@@ -25,7 +25,7 @@ bindsym $mod+Shift+v exec copyq toggle
 
 
 # start a terminal
-bindsym $mod+Return exec kitty 
+bindsym $mod+Return exec alacritty 
 
 # kill focused window
 bindsym $mod+Shift+q kill
