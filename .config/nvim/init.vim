@@ -43,14 +43,11 @@ set tabstop=2
 set shiftwidth=2
 " always uses spaces instead of tab characters
 set expandtab
-
-if (has('termguicolors'))
-	set termguicolors
-endif
+set termguicolors
 
 vmap <C-_> <plug>NERDCommenterToggle
 nmap <C-_> <plug>NERDCommenterToggle
-nmap nn :noh<CR>
+"nmap nn :noh<CR>
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
@@ -61,9 +58,10 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 " ###############
 " # => Theme    #
 " ###############
-let g:dracula_transparent_bg = v:true
+"let g:dracula_transparent_bg = v:true
 colorscheme dracula
 hi CocFloating guibg=#21222C
+hi NvimTreeNormal guibg=#191A21
 
 " #################
 " # => StatusLine #
@@ -143,8 +141,7 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 " open Explorer automatically
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NvimTreeOpen
+"autocmd VimEnter * NvimTreeOpen
 " Put newly opened windows to the right (to avoid putting nvim-tree to the right while resizing)
 set splitright 
 
@@ -152,7 +149,6 @@ set splitright
 " ####################
 " # => Tab Bar setup #
 " ####################
-set termguicolors
 lua << EOF
 require("bufferline").setup{
   options = {
@@ -169,6 +165,8 @@ nnoremap <silent>bn :BufferLineMoveNext<CR>
 nnoremap <silent>bp :BufferLineMovePrev<CR>
 " Sorting buffers
 nnoremap <silent>be :BufferLineSortByExtension<CR>
+
+
 
 
 " ####################
