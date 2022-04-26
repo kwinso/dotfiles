@@ -5,7 +5,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kyazdani42/nvim-tree.lua'
 
 " ICONS
-Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Productivity
@@ -58,10 +57,11 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 " ###############
 " # => Theme    #
 " ###############
-"let g:dracula_transparent_bg = v:true
+let g:dracula_transparent_bg = v:true
 colorscheme dracula
 hi CocFloating guibg=#21222C
 hi NvimTreeNormal guibg=#191A21
+hi BufferLineFill guibg=#282A36
 
 " #################
 " # => StatusLine #
@@ -75,12 +75,37 @@ endif
 
 let g:lightline = {
   \   'colorscheme': 'dracula',
+  \   'enable': { 'tabline': 0 },
   \   'active': {
   \     'left': [[  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
   \   }
   \ }
 " register compoments:
 call lightline#coc#register()
+
+
+" ####################
+" # => Tab Bar setup #
+" ####################
+lua << EOF
+require("bufferline").setup{
+  options = {
+    offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center"}},
+  }
+}
+EOF
+" These commands will navigate through buffers in order regardless of which mode you are using
+" e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
+nnoremap <silent> <A-,> :BufferLineCycleNext<CR>
+nnoremap <silent> <A-.> :BufferLineCyclePrev<CR>
+nnoremap <silent> <A-c> :bd<CR>
+" These commands will move the current buffer backwards or forwards in the bufferline
+nnoremap <silent>bn :BufferLineMoveNext<CR>
+nnoremap <silent>bg :BufferLinePick<CR>
+nnoremap <silent>bi :BufferLineTogglePin<CR>
+nnoremap <silent>bp :BufferLineMovePrev<CR>
+" Sorting buffers
+nnoremap <silent>be :BufferLineSortByExtension<CR>
 
 
 " ###############
@@ -141,32 +166,9 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 " open Explorer automatically
-"autocmd VimEnter * NvimTreeOpen
+autocmd VimEnter * NvimTreeOpen
 " Put newly opened windows to the right (to avoid putting nvim-tree to the right while resizing)
 set splitright 
-
-
-" ####################
-" # => Tab Bar setup #
-" ####################
-lua << EOF
-require("bufferline").setup{
-  options = {
-    offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center"}},
-  }
-}
-EOF
-" These commands will navigate through buffers in order regardless of which mode you are using
-" e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
-nnoremap <silent> <A-,> :BufferLineCycleNext<CR>
-nnoremap <silent> <A-.> :BufferLineCyclePrev<CR>
-" These commands will move the current buffer backwards or forwards in the bufferline
-nnoremap <silent>bn :BufferLineMoveNext<CR>
-nnoremap <silent>bp :BufferLineMovePrev<CR>
-" Sorting buffers
-nnoremap <silent>be :BufferLineSortByExtension<CR>
-
-
 
 
 " ####################
