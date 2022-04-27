@@ -120,7 +120,8 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # i3 gaps 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
-gaps inner 10
+gaps inner 5
+gaps outer 5
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # i3 WM Restart & Reload & Exit
@@ -170,12 +171,17 @@ bindsym $mod+r mode "resize"
 # +=+=+=+=+=+=+=+=+=+=+=+=+=+=
 # Window config / colors & border
 # +=+=+=+=+=+=+=+=+=+=+=+=+=+=
+set $bg0 #282A36
+set $bg1 #191A21
+set $fg #abb2bf
 
-client.focused          #545454 #545454    #ffffff #545454   #545454c
-client.focused_inactive #333333 #5f676a    #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222    #888888 #292d2e   #222222
-client.urgent           #2f343a #900000    #ffffff #900000   #900000
-client.background       #ffffff
+
+client.focused          $bg0 $bg0    $fg $bg0   $bg0
+client.unfocused        $bg1 $bg1    $fg $bg0   $bg0
+client.background       $bg0 
+# IDK If i ever need it
+#client.focused_inactive #333333 #5f676a    #ffffff #484e50   #5f676a
+#client.urgent           #2f343a #900000    #ffffff #900000   #900000
 
 for_window [class="^.*"] border pixel 0 
 
@@ -231,22 +237,28 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%- # descrease
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Startup
 # +=+=+=+=+=+=+=+=+=+=+=+=+
-exec --no-startup-id permid # Discord intergration for web services
+
+# Discord intergration for web services
+exec --no-startup-id permid 
 exec --no-startup-id copyq
 exec --no-startup-id dropbox
 exec --no-startup-id flameshot
 exec --no-startup-id telegram-desktop
 exec --no-startup-id conky -c ~/.config/conky/conky.conf
+
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # User Binds
 # +=+=+=+=+=+=+=+=+=+=+=+=+
-
 # ROFI
 bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 # Screenshots
 bindsym Print exec flameshot gui
 
 
+# Window transparency
+exec --no-startup-id picom
+
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Make sure that polybar is restarted with i3 restart
+# +=+=+=+=+=+=+=+=+=+=+=+=+
 exec_always ~/.config/polybar/launch.sh
