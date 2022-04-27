@@ -90,20 +90,30 @@ call lightline#coc#register()
 lua << EOF
 require("bufferline").setup{
   options = {
+    diagnostics = "coc",
+    diagnostics_update_in_insert = false,
     offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center"}},
   }
 }
 EOF
-" These commands will navigate through buffers in order regardless of which mode you are using
-" e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
+" Naviation
 nnoremap <silent> <A-,> :BufferLineCycleNext<CR>
 nnoremap <silent> <A-.> :BufferLineCyclePrev<CR>
-nnoremap <silent> <A-c> :bd<CR>
+nnoremap <silent>bg :BufferLinePick<CR>
+nnoremap <silent><A-1> <Cmd>BufferLineGoToBuffer 1<CR>
+nnoremap <silent><A-2> <Cmd>BufferLineGoToBuffer 2<CR>
+nnoremap <silent><A-3> <Cmd>BufferLineGoToBuffer 3<CR>
+nnoremap <silent><A-4> <Cmd>BufferLineGoToBuffer 4<CR>
+nnoremap <silent><A-5> <Cmd>BufferLineGoToBuffer 5<CR>
+nnoremap <silent><A-6> <Cmd>BufferLineGoToBuffer 6<CR>
+nnoremap <silent><A-7> <Cmd>BufferLineGoToBuffer 7<CR>
+nnoremap <silent><A-8> <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><A-9> <Cmd>BufferLineGoToBuffer 9<CR>
 " These commands will move the current buffer backwards or forwards in the bufferline
 nnoremap <silent>bn :BufferLineMoveNext<CR>
-nnoremap <silent>bg :BufferLinePick<CR>
-nnoremap <silent>bi :BufferLineTogglePin<CR>
 nnoremap <silent>bp :BufferLineMovePrev<CR>
+" Closing a buffer
+nnoremap <silent>bd :BufferLinePickClose<CR>
 " Sorting buffers
 nnoremap <silent>be :BufferLineSortByExtension<CR>
 
