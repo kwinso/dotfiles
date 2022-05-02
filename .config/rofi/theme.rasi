@@ -9,12 +9,12 @@
     background-color:           #282c34;
     border-color:               #282c34;
     text-color:                 #bbc2cf;
-    height:                     20px;
+    height:                     24px;
     font:                       "JetBrainsMono Nerd Font 9";
     prompt-font:                "Ubuntu Bold 9";
     prompt-background:          #51afef;
     prompt-foreground:          #282c34;
-    prompt-padding:             2px;
+    prompt-padding:             4px;
     selected-normal-background: #ae3f3e;
     selected-normal-foreground: #ffffff;
 }
@@ -41,12 +41,12 @@
     lines: 100;
 }
 #entry {
-    padding: 2px;
+    padding: 4px;
     expand: false;
     width: 10em;
 }
 #element {
-    padding: 2px 8px;
+    padding: 4px 8px;
 }
 #element selected {
     background-color: @selected-normal-background;
