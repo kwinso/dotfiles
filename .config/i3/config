@@ -201,6 +201,7 @@ for_window [class="discord"] move to workspace $ws9
 for_window [class="TelegramDesktop"] move to workspace $ws9
 for_window [class="Spotify"] move to workspace $ws10
 for_window [class="Code"] move to workspace $ws3
+for_window [class="KeePassXC"] move to workspace $ws4
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Startup Routines
@@ -245,6 +246,7 @@ exec --no-startup-id dropbox
 exec --no-startup-id flameshot
 exec --no-startup-id telegram-desktop
 exec --no-startup-id conky -c ~/.config/conky/conky.conf
+exec --no-startup-id picom
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # User Binds
@@ -253,10 +255,8 @@ exec --no-startup-id conky -c ~/.config/conky/conky.conf
 bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 # Screenshots
 bindsym Print exec flameshot gui
+bindsym $mod+Control+l exec  i3lock -c 282A36
 
-
-# Window transparency
-exec --no-startup-id picom
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Make sure that polybar is restarted with i3 restart
