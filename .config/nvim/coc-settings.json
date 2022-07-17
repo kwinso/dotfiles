@@ -1,4 +1,5 @@
 {
   "javascript.suggest.autoImports": true,
-  "typescript.suggest.autoImports": true
+  "typescript.suggest.autoImports": true,
+  "rust-analyzer.trace.server": "verbose"
 }

@@ -2,30 +2,34 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'rust-lang/rust.vim'
 Plug 'kyazdani42/nvim-tree.lua'
 
-" ICONS
+ "ICONS
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Productivity
-Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
+"Plug 'airblade/vim-gitgutter'
+"Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'Chiel92/vim-autoformat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ap/vim-css-color'
 
 " THEME
-Plug 'Mofiqul/dracula.nvim'
+"Plug 'Mofiqul/dracula.nvim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'ellisonleao/gruvbox.nvim'
 
 " Editor Status
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
 
-" TS Syntax
-Plug 'HerringtonDarkholme/yats.vim' 
+"Plug 'sbdchd/neoformat'
 
 " Initialize plugin system
 call plug#end()
@@ -46,22 +50,31 @@ set termguicolors
 
 vmap <C-_> <plug>NERDCommenterToggle
 nmap <C-_> <plug>NERDCommenterToggle
-"nmap nn :noh<CR>
+
+" tab indentaion
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 " Fuzzy find with Ctrl + P
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
 
 
 " ###############
 " # => Theme    #
 " ###############
-let g:dracula_transparent_bg = v:true
-colorscheme dracula
-hi CocFloating guibg=#21222C
-hi NvimTreeNormal guibg=#191A21
-hi BufferLineFill guibg=#282A36
+"let g:dracula_transparent_bg = v:true
+colorscheme gruvbox
+"hi CocFloating guibg=#21222C
+"hi NvimTreeNormal guibg=#191A21
+"hi BufferLineFill guibg=#282A36
 
 " #################
 " # => StatusLine #
@@ -74,7 +87,7 @@ if !has('gui_running')
 endif
 
 let g:lightline = {
-  \   'colorscheme': 'dracula',
+  \   'colorscheme': 'gruvbox',
   \   'enable': { 'tabline': 0 },
   \   'active': {
   \     'left': [[  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
@@ -89,17 +102,18 @@ call lightline#coc#register()
 " ####################
 lua << EOF
 require("bufferline").setup{
-  options = {
-    diagnostics = "coc",
-    diagnostics_update_in_insert = false,
-    offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center"}},
-  }
+ options = {
+   diagnostics = "coc",
+   diagnostics_update_in_insert = false,
+   offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center"}},
+ }
 }
 EOF
+
 " Naviation
 nnoremap <silent> <A-,> :BufferLineCycleNext<CR>
 nnoremap <silent> <A-.> :BufferLineCyclePrev<CR>
-nnoremap <silent>bg :BufferLinePick<CR>
+nnoremap <silent>tg :BufferLinePick<CR>
 nnoremap <silent><A-1> <Cmd>BufferLineGoToBuffer 1<CR>
 nnoremap <silent><A-2> <Cmd>BufferLineGoToBuffer 2<CR>
 nnoremap <silent><A-3> <Cmd>BufferLineGoToBuffer 3<CR>
@@ -110,93 +124,89 @@ nnoremap <silent><A-7> <Cmd>BufferLineGoToBuffer 7<CR>
 nnoremap <silent><A-8> <Cmd>BufferLineGoToBuffer 8<CR>
 nnoremap <silent><A-9> <Cmd>BufferLineGoToBuffer 9<CR>
 " These commands will move the current buffer backwards or forwards in the bufferline
-nnoremap <silent>bn :BufferLineMoveNext<CR>
-nnoremap <silent>bp :BufferLineMovePrev<CR>
+nnoremap <silent>tn :BufferLineMoveNext<CR>
+nnoremap <silent>tp :BufferLineMovePrev<CR>
 " Closing a buffer
-nnoremap <silent>bd :BufferLinePickClose<CR>
+nnoremap <silent>td :BufferLinePickClose<CR>
 " Sorting buffers
-nnoremap <silent>be :BufferLineSortByExtension<CR>
+nnoremap <silent>te :BufferLineSortByExtension<CR>
 
 
 " ###############
 " # => NvimTree #
 " ###############
+" actions = {
+" },
 lua << EOF
-require'nvim-tree'.setup {
-  actions = {
-    view = { 
-      side = "left",
-      },
-    open_file = {
-      resize_window = true
-      }
-    },
-   filters = {
-    dotfiles = false,
-    custom = { '.git'},
-    exclude = {},
-  },
-}
+require("nvim-tree").setup({
+   git = { enable = true },
+   create_in_closed_folder = true,
+   renderer = {
+     group_empty = true,
+     highlight_opened_files = "name",
+     add_trailing = true,
+     highlight_git = true,
+     icons = {
+       glyphs = {
+         default = "",
+         symlink = "",
+         git = {
+           unstaged = "✗",
+           staged = "✓",
+           unmerged = "",
+           renamed = "➜",
+           untracked =  "★",
+           deleted = "",
+           ignored = "◌"
+         },
+         folder = {
+           arrow_open = "",
+           arrow_closed =  "",
+           default =  "",
+           open = "",
+           empty =  "",
+           empty_open = "",
+           symlink = "",
+           symlink_open = ""
+         }
+       }
+     }
+   },
+   view = {
+     side = "left"
+   },
+  filters = {
+     dotfiles = false,
+     custom = { "^.git$" },
+     exclude = {}
+   }
+})
 EOF
-let g:nvim_tree_git_hl = 1 
-let g:nvim_tree_highlight_opened_files = 0 
-let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
-let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
-let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
-let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
-let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target. let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
-let g:nvim_tree_create_in_closed_folder = 1 "0 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
-let g:nvim_tree_special_files = { 'README.md': 1, 'Cargo.toml': 1,  } " List of filenames that gets highlighted with NvimTreeSpecialFile
-" default will show icon by default if no icon is provided
-" default shows no icon by default
-let g:nvim_tree_icons = {
-    \ 'default': "",
-    \ 'symlink': "",
-    \ 'git': {
-    \   'unstaged': "✗",
-    \   'staged': "✓",
-    \   'unmerged': "",
-    \   'renamed': "➜",
-    \   'untracked': "★",
-    \   'deleted': "",
-    \   'ignored': "◌"
-    \   },
-    \ 'folder': {
-    \   'arrow_open': "",
-    \   'arrow_closed': "",
-    \   'default': "",
-    \   'open': "",
-    \   'empty': "",
-    \   'empty_open': "",
-    \   'symlink': "",
-    \   'symlink_open': "",
-    \   }
-    \ }
+
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 " open Explorer automatically
 autocmd VimEnter * NvimTreeOpen
 " Put newly opened windows to the right (to avoid putting nvim-tree to the right while resizing)
-set splitright 
+set splitright
 
 
 " ####################
 " # => COC Config    #
 " ####################
+"\ 'coc-tsserver',
+"\ 'coc-eslint',
+"\ 'coc-prettier',
 let g:coc_global_extensions = [
-      \ 'coc-snippets',
-      \ 'coc-pairs',
-      \ 'coc-tsserver',
-      \ 'coc-eslint',
-      \ 'coc-prettier',
-      \ 'coc-json',
-      \ ]
-" from readme
+     \ 'coc-snippets',
+     \ 'coc-pairs',
+     \ 'coc-json',
+     \ ]
 " if hidden is not set, TextEdit might fail.
-set hidden 
-" Some servers have issues with backup files, see #649 set nobackup set nowritebackup 
-" Better display for messages set cmdheight=2 
+set hidden
+" Some servers have issues with backup files, see #649 set nobackup set nowritebackup
+" Better display for messages set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 " don't give |ins-completion-menu| messages.
@@ -207,9 +217,9 @@ set signcolumn=yes
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+     \ pumvisible() ? "\<C-n>" :
+     \ <SID>check_back_space() ? "\<TAB>" :
+     \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -220,8 +230,8 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+ "let col = col('.') - 1
+ "return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -236,11 +246,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+ "if (index(['vim','help'], &filetype) >= 0)
+   "execute 'h '.expand('<cword>')
+ "else
+   "call CocAction('doHover')
+ "endif
 endfunction
 
 " Highlight symbol under cursor on CursorHold
@@ -253,11 +263,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup formatting
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+ "autocmd!
+ """ Setup formatexpr specified filetype(s).
+ "autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+ """ Update signature help on jump placeholder
+ "autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -310,9 +320,9 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " ####################
 "let g:prettier#quickfix_enabled = 0
 "let g:prettier#quickfix_auto_focus = 0
-" prettier command for coc
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-" run prettier on save
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+ "prettier command for coc
+"command! -nargs=0 Prettier :CocCommand prettier.formatFile
+ "run prettier on save
+"let g:prettier#autoformat = 0
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 autocmd BufWrite *.rs Autoformat
