@@ -6,9 +6,9 @@
 ; primary = #7b4eed
 ; secondary = #7b4eed
 ; black = #000000
-background = #282A36
-foreground = #abb2bf
-foreground-alt = #B45EE0
+background = #282828
+foreground = #BEB292
+foreground-alt = #D3869B
 
 
 [bar/top]
