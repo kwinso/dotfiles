@@ -174,14 +174,22 @@ bindsym $mod+r mode "resize"
 set $bg0 #282A36
 set $bg1 #191A21
 set $fg #abb2bf
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+set $lightgray #bdae93
 
-
-client.focused          $bg0 $bg0    $fg $bg0   $bg0
-client.unfocused        $bg1 $bg1    $fg $bg0   $bg0
-client.background       $bg0 
-# IDK If i ever need it
-#client.focused_inactive #333333 #5f676a    #ffffff #484e50   #5f676a
-#client.urgent           #2f343a #900000    #ffffff #900000   #900000
+# class                 border|backgr|text|indicator|child_border
+client.focused          $bg $bg $lightgray $purple $darkgray
+client.focused_inactive $darkgray $darkgray $lightgray $purple $darkgray
+client.unfocused        $darkgray $darkgray $lightgray $purple $darkgray
+client.urgent           $red $red $white $red $red
 
 for_window [class="^.*"] border pixel 0 
 
@@ -255,7 +263,7 @@ exec --no-startup-id picom
 bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 # Screenshots
 bindsym Print exec flameshot gui
-bindsym $mod+Control+l exec  i3lock -c 282A36
+bindsym $mod+Control+l exec  i3lock -i ~/Pictures/town-landscape.png
 
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
