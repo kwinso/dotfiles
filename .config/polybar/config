@@ -6,9 +6,11 @@
 ; primary = #7b4eed
 ; secondary = #7b4eed
 ; black = #000000
+; THEMER
 background = #282828
-foreground = #BEB292
-foreground-alt = #D3869B
+foreground = #bdae93
+foreground_alt = #FF79C6
+; THEMER_END
 
 
 [bar/top]
@@ -81,14 +83,14 @@ type = internal/xkeyboard
 blacklist-0 = num lock
 
 format-prefix = "  "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground_alt}
 
 label-layout = %layout%
 
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-foreground = ${colors.background}
-label-indicator-background = ${colors.foreground-alt}
+label-indicator-background = ${colors.foreground_alt}
 
 [module/i3]
 type = internal/i3
@@ -118,7 +120,7 @@ label-mode-background = ${colors.background}
 
 ; focused = Active workspace on focused monitor
 label-focused = %icon% %index%
-label-focused-foreground = ${colors.foreground-alt}
+label-focused-foreground = ${colors.foreground_alt}
 label-focused-background = ${colors.background}
 label-focused-padding = 1
 
@@ -131,14 +133,14 @@ label-unfocused-padding = 1
 type = internal/cpu
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground_alt}
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground_alt}
 
 label = %percentage_used%%
 
@@ -151,7 +153,7 @@ date = %d.%m
 time = %H:%M:%S
 
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground_alt}
 
 label = %date% | %time%
 
@@ -159,13 +161,13 @@ label = %date% | %time%
 type = internal/alsa
 
 format-volume-prefix = " "
-format-volume-foreground = ${colors.foreground-alt}
+format-volume-foreground = ${colors.foreground_alt}
 
 label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
 
 format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
+format-muted-foreground = ${colors.foreground_alt}
 label-muted = mute
 
 bar-volume-width = 10
@@ -183,7 +185,7 @@ bar-volume-fill = ─
 bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-foreground = ${colors.foreground_alt}
 
 
 [module/vpn_ip]
@@ -191,7 +193,7 @@ type = custom/script
 exec = /usr/bin/python3 ~/.config/polybar/scripts/vpn_ip.py
 interval = 15.0
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground_alt}
 format =  <label>
 
 ; [module/spotify]

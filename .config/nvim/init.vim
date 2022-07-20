@@ -1,6 +1,21 @@
+set mouse+=a
+set relativenumber
+set nohlsearch
+set incsearch
+set nu
+set colorcolumn=120
+set smarttab
+set ignorecase
+set cindent
+set tabstop=2
+set shiftwidth=2
+" always uses spaces instead of tab characters
+set expandtab
+set termguicolors
+
+
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -20,7 +35,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ap/vim-css-color'
 
 " THEME
-"Plug 'Mofiqul/dracula.nvim'
+Plug 'Mofiqul/dracula.nvim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'ellisonleao/gruvbox.nvim'
 
@@ -28,29 +43,11 @@ Plug 'ellisonleao/gruvbox.nvim'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'itchyny/lightline.vim'
 Plug 'josa42/vim-lightline-coc'
-
-"Plug 'sbdchd/neoformat'
-
-" Initialize plugin system
 call plug#end()
 
 
-" ####################
-" # => Basic Stuff   #
-" ####################
-set mouse+=a
-set relativenumber
-set smarttab
-set cindent
-set tabstop=2
-set shiftwidth=2
-" always uses spaces instead of tab characters
-set expandtab
-set termguicolors
-
 vmap <C-_> <plug>NERDCommenterToggle
 nmap <C-_> <plug>NERDCommenterToggle
-
 " tab indentaion
 nnoremap <Tab> >>_
 nnoremap <S-Tab> <<_
@@ -63,15 +60,27 @@ noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 " Fuzzy find with Ctrl + P
 nnoremap <C-p> <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap ff <cmd>Telescope live_grep<cr>
+nnoremap fb <cmd>Telescope buffers<cr>
+" SOme git commands
+nnoremap gb <cmd>Telescope git_branches<cr>
+nnoremap gs <cmd>Telescope git_status<cr>
+nnoremap gc <cmd>Telescope git_commits<cr>
 
 
 " ###############
 " # => Theme    #
 " ###############
-"let g:dracula_transparent_bg = v:true
+" THEMER
 colorscheme gruvbox
+let g:lightline = {
+  \   'colorscheme': 'gruvbox',
+  \   'enable': { 'tabline': 0 },
+  \   'active': {
+  \     'left': [[  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
+  \   }
+  \ }
+" THEMER_END
 "hi CocFloating guibg=#21222C
 "hi NvimTreeNormal guibg=#191A21
 "hi BufferLineFill guibg=#282A36
@@ -85,17 +94,6 @@ set noshowmode
 if !has('gui_running')
   set t_Co=256
 endif
-
-let g:lightline = {
-  \   'colorscheme': 'gruvbox',
-  \   'enable': { 'tabline': 0 },
-  \   'active': {
-  \     'left': [[  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
-  \   }
-  \ }
-" register compoments:
-call lightline#coc#register()
-
 
 " ####################
 " # => Tab Bar setup #
@@ -139,7 +137,7 @@ nnoremap <silent>te :BufferLineSortByExtension<CR>
 " },
 lua << EOF
 require("nvim-tree").setup({
-   git = { enable = true },
+   git = { enable = true, ignore = false },
    create_in_closed_folder = true,
    renderer = {
      group_empty = true,
@@ -221,17 +219,17 @@ inoremap <silent><expr> <TAB>
      \ <SID>check_back_space() ? "\<TAB>" :
      \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" Use <c-space> to trigger completion.
+"" Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
+"" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+"" Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+ "Or use `complete_info` if your vim support it, like:
+ inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 function! s:check_back_space() abort
- "let col = col('.') - 1
- "return !col || getline('.')[col - 1]  =~# '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use `[g` and `]g` to navigate diagnostics

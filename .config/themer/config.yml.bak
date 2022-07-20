@@ -1,0 +1,46 @@
+# You can find more info on how to use this configuration file in Themer's wiki
+
+reload: "i3 restart"
+
+# place your themes' variables here
+themes:
+  gruvbox:
+    background: "#282828"
+    background_alt: "#1E1E1E"
+    red: "#cc241d"
+    foreground: "#bdae93"
+    foreground_alt: "#FF79C6"
+  dracula:
+    background: "#282A36"
+    background_alt: "#16171D"
+    foreground: "#ABB2BF"
+    foreground_alt: "#FF79C6"
+
+# list files you want to be managed by Themer
+files:
+  alacritty:
+    path: "~/.config/alacritty/alacritty.yml"
+    comment: "#" 
+    custom: "colors: *<name>"
+
+  i3:
+    path: "~/.config/i3/config"
+    format: "set $<key> <value>"
+
+  nvim:
+    path: "~/.config/nvim/init.vim"
+    comment: "\""
+    custom: |
+      colorscheme <name>
+      let g:lightline = {
+        \   'colorscheme': '<name>',
+        \   'enable': { 'tabline': 0 },
+        \   'active': {
+        \     'left': [[  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]]
+        \   }
+        \ }
+
+  polybar:
+    ignore: ["red", "background_alt"]
+    path: "~/.config/polybar/config"
+    comment: ";"
