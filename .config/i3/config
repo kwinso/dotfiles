@@ -254,7 +254,6 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%- # descrease
 exec --no-startup-id permid 
 exec --no-startup-id copyq
 exec --no-startup-id dropbox
-exec --no-startup-id flameshot
 exec --no-startup-id telegram-desktop
 exec --no-startup-id conky -c ~/.config/conky/conky.conf
 exec --no-startup-id picom
@@ -265,7 +264,7 @@ exec --no-startup-id picom
 # ROFI
 bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 # Screenshots
-bindsym Print exec flameshot gui
+bindsym Print exec gnome-screenshoter -i
 bindsym $mod+Control+l exec  i3lock -i ~/Pictures/arch-gruvbox.png
 
 
