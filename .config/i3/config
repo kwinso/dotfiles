@@ -264,7 +264,7 @@ exec --no-startup-id picom
 # ROFI
 bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 # Screenshots
-bindsym Print exec gnome-screenshoter -i
+bindsym Print exec gnome-screenshot -i
 bindsym $mod+Control+l exec  i3lock -i ~/Pictures/arch-gruvbox.png
 
 
