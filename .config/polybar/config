@@ -192,7 +192,7 @@ type = custom/script
 exec = /bin/env python ~/.config/polybar/scripts/vpn_ip.py
 interval = 15.0
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground_alt}
 format =  <label>
 click-left = /bin/env bash ~/.config/polybar/scripts/copy_vpn.bash
 
