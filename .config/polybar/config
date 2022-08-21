@@ -187,14 +187,14 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground_alt}
 
-
 [module/vpn_ip]
 type = custom/script
-exec = /usr/bin/python3 ~/.config/polybar/scripts/vpn_ip.py
+exec = /bin/env python ~/.config/polybar/scripts/vpn_ip.py
 interval = 15.0
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground_alt}
+format-prefix-foreground = ${colors.foreground-alt}
 format =  <label>
+click-left = /bin/env bash ~/.config/polybar/scripts/copy_vpn.bash
 
 ; [module/spotify]
 ; type = custom/script
