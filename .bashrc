@@ -29,6 +29,9 @@ alias thmd="cd $THM"
 alias vpn="sudo openvpn"
 
 alias l="ls -la"
+alias cat="bat"
+alias hx="helix"
 
-export TERMINAL="kitty"
+export TERMINAL="alacritty"
 set -o vi
+shopt -s autocd

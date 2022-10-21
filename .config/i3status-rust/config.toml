@@ -1,0 +1,52 @@
+icons_format = "{icon}"
+
+[theme]
+theme = "native"
+
+[icons]
+icons = "awesome"
+
+[[block]]
+block = "cpu"
+format = "$icon $utilization "
+
+[[block]]
+block = "memory"
+format= " $icon $mem_total_used_percents.eng(2) "
+format_alt = " $icon $swap_used_percents.eng(2) (SWP) "
+
+[[block]]
+block = "disk_space"
+path = "/"
+interval = 20
+warning = 20.0
+alert = 10.0
+format = " $icon root: $used.eng(2)/$total.eng(2) "
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+[[block]]
+block = "battery"
+format = " $icon $percentage "
+
+[[block]]
+block = "temperature"
+format = " $icon $max max "
+format_alt = " $icon $min min, $max max, $average avg "
+interval = 10
+chip = "*-isa-*"
+
+[[block]]
+block = "custom"
+command = "sh ~/.config/i3status-rust/scripts/keyboard.sh"
+interval = 1
+
+[[block]]
+block = "time"
+interval = 5
+format = " %a %d/%m %I:%M %p "

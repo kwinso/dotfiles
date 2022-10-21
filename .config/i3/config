@@ -180,11 +180,10 @@ set $aqua #689d68
 set $gray #a89984
 
 # THEMER
-set $background #282828
-set $background_alt #1E1E1E
-set $foreground #bdae93
+set $background #282A36
+set $background_alt #16171D
+set $foreground #ABB2BF
 set $foreground_alt #FF79C6
-set $red #cc241d
 # THEMER_END
 
 
@@ -194,8 +193,19 @@ client.focused_inactive $foreground_alt $background $foreground $purple $foregro
 client.unfocused        $background_alt $background_alt $foreground $purple $foreground
 client.urgent           $red $red $white $red $red
 
-for_window [class="^.*"] border pixel 0 
+bar {
+	status_command i3status-rs
+	position top
+    	font pango:JetBrains Mono Nerd Font, FontAwesome 11
+	colors {
+		background $background	
+		#                  border     inner bg        fg
+		focused_workspace $background $foreground $background
+        inactive_workspace $background $background $foreground
+	}
+}
 
+for_window [class="^.*"] border pixel 0 
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+=+=
 # Floating windows
@@ -223,10 +233,10 @@ for_window [class="KeePassXC"] move to workspace $ws4
 exec setxkbmap -layout "us, ru" -option "grp:alt_shift_toggle"
 
 # enabling tapping on touchpad
-exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1 
+exec xinput set-prop "ELAN0412:01 04F3:3240 Touchpad" "libinput Tapping Enabled" 1
 
 # Setting wallpaper
-exec_always  feh --bg-scale /home/mouse/Pictures/space.png
+exec_always feh --bg-scale /home/mouse/Pictures/city.png
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Media Controls Setup
@@ -256,22 +266,34 @@ exec --no-startup-id permid
 exec --no-startup-id copyq
 exec --no-startup-id dropbox
 exec --no-startup-id telegram-desktop
-exec --no-startup-id conky -c ~/.config/conky/conky.conf
+# exec --no-startup-id conky -c ~/.config/conky/conky.conf
 exec --no-startup-id picom
+exec --no-startup-id flameshot
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # User Binds
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # ROFI
-bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
+#bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
+bindsym $mod+d exec dmenu_run \
+	-nb '$background_alt' \
+	-nf '$foreground' \
+	-sb '$background' \
+	-sf '$foreground_alt' \
+	-fn "JetBrains Mono Nerd Font:pixelsize=18" \
+	-p "dmenu"
 # Screenshots
-bindsym Print exec gscreenshot -c -s
-bindsym Control+Print exec gscreenshot
-bindsym Control+Shift+Print exec obs --minimize-to-tray --startrecording
-bindsym $mod+Control+l exec  i3lock -i ~/Pictures/arch-gruvbox.png
+bindsym Print exec flameshot gui
+bindsym Shift + Print exec flameshot full -c
+
+# bindsym Print exec gscreenshot -c -s
+# bindsym Control+Print exec gscreenshot
+# bindsym Control+Shift+Print exec obs --minimize-to-tray --startrecording
+
+bindsym $mod+Control+l exec  i3lock -i ~/Pictures/city.png
 
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Make sure that polybar is restarted with i3 restart
 # +=+=+=+=+=+=+=+=+=+=+=+=+
-exec_always ~/.config/polybar/launch.sh
+# exec_always ~/.config/polybar/launch.sh
