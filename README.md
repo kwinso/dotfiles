@@ -13,7 +13,8 @@ yay -S ttf-font-awesome \
   xorg \
   xorg-xinit \
   dmenu \
-  ly
+  ly \
+  brightnessctl
 ```
 
 # Applying
