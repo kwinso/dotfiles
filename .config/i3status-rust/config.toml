@@ -25,7 +25,7 @@ format = " $icon root: $used.eng(2)/$total.eng(2) "
 
 [[block]]
 block = "custom"
-format = "yay: $text"
+format = " yay: $text "
 command = "yay -Pu | wc -l"
 # once in 3 hours
 interval = 10800
@@ -39,12 +39,12 @@ cmd = "pavucontrol"
 
 [[block]]
 block = "net"
-format = " $icon {$signal_strength $ssid| Wired connection} "
-format_alt = " $icon via $device "
+format = " $icon  {$signal_strength $ssid| Wired connection} "
+format_alt = " $icon  via $device "
 
 [[block]]
 block = "battery"
-format = " $icon $percentage "
+format = " $icon  $percentage "
 
 [[block]]
 block = "temperature"
