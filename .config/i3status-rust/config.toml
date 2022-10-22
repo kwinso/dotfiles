@@ -31,6 +31,11 @@ command = "yay -Pu | wc -l"
 interval = 10800
 
 [[block]]
+block = "backlight"
+device = "intel_backlight"
+format = " bri: $brightness "
+
+[[block]]
 block = "sound"
 driver = "pulseaudio"
 [[block.click]]
