@@ -24,6 +24,13 @@ alert = 10.0
 format = " $icon root: $used.eng(2)/$total.eng(2) "
 
 [[block]]
+block = "custom"
+format = "yay: $text"
+command = "yay -Pu | wc -l"
+# once in 3 hours
+interval = 10800
+
+[[block]]
 block = "sound"
 driver = "pulseaudio"
 [[block.click]]

@@ -180,10 +180,10 @@ set $aqua #689d68
 set $gray #a89984
 
 # THEMER
-set $background #282A36
-set $background_alt #16171D
-set $foreground #ABB2BF
-set $foreground_alt #FF79C6
+set $background #24283b
+set $background_alt #292e42
+set $foreground #c0caf5
+set $foreground_alt #9d7cd8
 # THEMER_END
 
 

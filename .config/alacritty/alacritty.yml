@@ -306,7 +306,7 @@ schemes:
       white:   '#e6e6d1'
 
 # THEMER
-colors: *dracula
+colors: *tokyonight
 # THEMER_END
 
 # Colors (Tomorrow Night)
