@@ -38,6 +38,11 @@ button = "left"
 cmd = "pavucontrol"
 
 [[block]]
+block = "net"
+format = " $icon {$signal_strength $ssid| Wired connection} "
+format_alt = " $icon via $device "
+
+[[block]]
 block = "battery"
 format = " $icon $percentage "
 
