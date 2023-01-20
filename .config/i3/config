@@ -235,9 +235,6 @@ exec setxkbmap -layout "us, ru" -option "grp:alt_shift_toggle"
 # enabling tapping on touchpad
 exec xinput set-prop "ELAN0412:01 04F3:3240 Touchpad" "libinput Tapping Enabled" 1
 
-# Setting wallpaper
-exec_always feh --bg-scale /home/mouse/Pictures/city.jpg
-
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # Media Controls Setup
 # +=+=+=+=+=+=+=+=+=+=+=+=+
@@ -291,7 +288,7 @@ bindsym Shift + Print exec flameshot full -c
 # bindsym Control+Print exec gscreenshot
 # bindsym Control+Shift+Print exec obs --minimize-to-tray --startrecording
 
-bindsym $mod+Control+l exec xkb-switch -s us; i3lock -i ~/Pictures/lockscreen.png
+bindsym $mod+Control+l exec betterlockscreen -l
 
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+

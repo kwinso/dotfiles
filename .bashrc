@@ -16,8 +16,8 @@ alias gaa="git add ."
 alias gcm="git commit -m"
 alias gpo="git push -u origin"
 
-# Own Path
-# export PATH=$PATH:/home/mouse/code/bins/
+# GO Path
+export PATH=$PATH:/home/mouse/go/bin
 
 # CTF Vars
 export CTF_ROOT="/home/mouse/ctf"
@@ -32,6 +32,10 @@ alias l="ls -la"
 alias cat="bat"
 alias hx="helix"
 
+export EDITOR="helix"
 export TERMINAL="alacritty"
+export TERM="xterm-256color"
+
 set -o vi
 shopt -s autocd
+. "$HOME/.cargo/env"
