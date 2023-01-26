@@ -7,6 +7,11 @@ theme = "native"
 icons = "awesome"
 
 [[block]]
+block = "custom"
+command = "sh ~/.config/i3status-rust/scripts/playerctl.sh"
+interval = 3
+
+[[block]]
 block = "cpu"
 format = "$icon $utilization "
 
