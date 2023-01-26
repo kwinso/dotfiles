@@ -240,10 +240,9 @@ exec xinput set-prop "ELAN0412:01 04F3:3240 Touchpad" "libinput Tapping Enabled"
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 
 # Playerctl binds
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
+bindsym Prior exec playerctl previous
+bindsym Pause exec playerctl play-pause
+bindsym Next exec playerctl next
 
 # Volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
@@ -289,6 +288,7 @@ bindsym Shift + Print exec flameshot full -c
 # bindsym Control+Shift+Print exec obs --minimize-to-tray --startrecording
 
 bindsym $mod+Control+l exec betterlockscreen -l
+exec --no-startup-id exec beetterlockscreen -w -q 
 
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
