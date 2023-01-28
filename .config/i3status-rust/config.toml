@@ -1,23 +1,28 @@
 icons_format = "{icon}"
 
 [theme]
-theme = "native"
+theme = "semi-native"
+[theme.overrides]
+idle_fg = "#ffffff"
 
 [icons]
 icons = "awesome"
 
 [[block]]
 block = "custom"
-command = "sh ~/.config/i3status-rust/scripts/playerctl.sh"
-interval = 3
+format = " yay: $text "
+command = "yay -Sy; yay -Qu | wc -l"
+# once in 3 hours
+interval = 10800
 
 [[block]]
 block = "cpu"
-format = "$icon $utilization "
+format = " CPU: $utilization "
+
 
 [[block]]
 block = "memory"
-format= " $icon $mem_used_percents.eng(2) "
+format= " MEM: $mem_used_percents.eng(2) "
 format_alt = " $icon $swap_used_percents.eng(2) (SWP) "
 
 [[block]]
@@ -28,24 +33,12 @@ warning = 20.0
 alert = 10.0
 format = " $icon root: $used.eng(2)/$total.eng(2) "
 
-[[block]]
-block = "custom"
-format = " yay: $text "
-command = "yay -Pu | wc -l"
-# once in 3 hours
-interval = 10800
 
 [[block]]
 block = "backlight"
 device = "intel_backlight"
 format = " bri: $brightness "
 
-[[block]]
-block = "sound"
-driver = "pulseaudio"
-[[block.click]]
-button = "left"
-cmd = "pavucontrol"
 
 [[block]]
 block = "net"
@@ -55,6 +48,7 @@ format_alt = " $icon  via $device "
 [[block]]
 block = "battery"
 format = " $icon  $percentage "
+empty_format = " $icon Empty! "
 
 [[block]]
 block = "temperature"
@@ -67,6 +61,23 @@ chip = "*-isa-*"
 block = "custom"
 command = "sh ~/.config/i3status-rust/scripts/keyboard.sh"
 interval = 1
+[[block.click]]
+button = "left"
+cmd = "xkb-switch -n"
+
+[[block]]
+block = "custom"
+command = "sh ~/.config/i3status-rust/scripts/playerctl.sh"
+format = " $text.rot-str(18) "
+hide_when_empty = true
+interval = 3
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
 
 [[block]]
 block = "time"
