@@ -32,7 +32,7 @@ alias l="ls -la"
 alias cat="bat"
 alias hx="helix"
 
-export EDITOR="helix"
+export EDITOR="nvim"
 export TERMINAL="alacritty"
 export TERM="xterm-256color"
 
