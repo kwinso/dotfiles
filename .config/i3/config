@@ -288,7 +288,7 @@ bindsym Shift + Print exec flameshot full -c
 bindsym Control+Shift+Print exec obs --minimize-to-tray --startrecording
 
 bindsym $mod+Control+l exec betterlockscreen -l
-exec --no-startup-id exec beetterlockscreen -w -q 
+exec --no-startup-id beetterlockscreen -w -q 
 
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
