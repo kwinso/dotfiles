@@ -6,7 +6,7 @@ theme = "semi-native"
 idle_fg = "#ffffff"
 
 [icons]
-icons = "awesome"
+icons = "awesome6"
 
 [[block]]
 block = "custom"
@@ -22,8 +22,8 @@ format = " CPU: $utilization "
 
 [[block]]
 block = "memory"
-format= " MEM: $mem_used_percents.eng(2) "
-format_alt = " $icon $swap_used_percents.eng(2) (SWP) "
+format = " MEM: $mem_used_percents.eng(w:2) "
+format_alt = " $icon $swap_used_percents.eng(w:2) (SWP) "
 
 [[block]]
 block = "disk_space"
@@ -31,7 +31,7 @@ path = "/"
 interval = 20
 warning = 20.0
 alert = 10.0
-format = " $icon root: $used.eng(2)/$total.eng(2) "
+format = " $icon root: $used.eng(w:2)/$total.eng(w:2) "
 
 
 [[block]]
@@ -48,6 +48,8 @@ format_alt = " $icon  via $device "
 [[block]]
 block = "battery"
 format = " $icon  $percentage "
+full_format = " $icon  $percentage "
+not_charging_format = " $icon  $percentage "
 empty_format = " $icon Empty! "
 
 [[block]]
@@ -68,7 +70,7 @@ cmd = "xkb-switch -n"
 [[block]]
 block = "custom"
 command = "sh ~/.config/i3status-rust/scripts/playerctl.sh"
-format = " $text.rot-str(18) "
+format = " $text.str(w:18,rot_interval:0.5) "
 hide_when_empty = true
 interval = 3
 

@@ -254,6 +254,11 @@ bindsym XF86MonBrightnessUp exec brightnessctl s 10%+ # increase
 bindsym XF86MonBrightnessDown exec brightnessctl s 10%- # descrease
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
+# Gestures
+# +=+=+=+=+=+=+=+=+=+=+=+=+
+# exec --no-startup-id fusuma
+
+# +=+=+=+=+=+=+=+=+=+=+=+=+
 # Startup
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 
@@ -288,7 +293,7 @@ bindsym Shift + Print exec flameshot full -c
 bindsym Control+Shift+Print exec obs --minimize-to-tray --startrecording
 
 bindsym $mod+Control+l exec betterlockscreen -l
-exec --no-startup-id beetterlockscreen -w -q 
+exec --no-startup-id betterlockscreen -w -q 
 
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+
