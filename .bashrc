@@ -13,11 +13,13 @@ force_color_prompt=yes
 alias grep="grep --color=auto"
 
 alias gaa="git add ."
+alias ga="git add "
 alias gcm="git commit -m"
 alias gpo="git push -u origin"
+alias gs="git status"
 
 # GO Path
-export PATH=$PATH:/home/mouse/go/bin
+export PATH=$(go env GOPATH)/bin:$PATH
 
 # CTF Vars
 export CTF_ROOT="/home/mouse/ctf"
