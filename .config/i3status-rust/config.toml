@@ -84,4 +84,4 @@ cmd = "pavucontrol"
 [[block]]
 block = "time"
 interval = 5
-format = " %a %d/%m %I:%M %p "
+format = " $timestamp.datetime(f:'%a %d/%m %I:%M %p', l:en_US) "
