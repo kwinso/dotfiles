@@ -241,7 +241,8 @@ exec xinput set-prop "ELAN0412:01 04F3:3240 Touchpad" "libinput Tapping Enabled"
 
 # Playerctl binds
 bindsym Prior exec playerctl previous
-bindsym Pause exec playerctl play-pause
+bindsym Home exec playerctl play-pause
+bindsym End exec playerctl play-pause
 bindsym Next exec playerctl next
 
 # Volume
