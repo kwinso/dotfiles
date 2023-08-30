@@ -41,3 +41,5 @@ export TERM="xterm-256color"
 set -o vi
 shopt -s autocd
 . "$HOME/.cargo/env"
+
+eval "$(thefuck --alias)"
