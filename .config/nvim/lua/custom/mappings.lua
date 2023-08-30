@@ -3,17 +3,24 @@ local M = {}
 M.dap = {
   plugin = true,
   n = {
-    ["<leader>db"] = {"<cmd> DapToggleBreakpoint <CR>"}
+    ["<leader>dc"] = {
+      function ()
+        require("dapui").close()
+      end,
+      "Close DapUI"
+    },
+    ["<leader>db"] = {"<cmd> DapToggleBreakpoint <CR>", "Toggle Debug Breakpoint"}
   }
 }
 
 M.dap_python = {
   plugin = true,
   n = {
-    ["<leader>dpr"] = {
+    ["<leader>dr"] = {
       function()
         require('dap-python').test_method()
-      end
+      end,
+      "Run python debugger"
     }
   }
 }
