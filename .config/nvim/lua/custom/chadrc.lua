@@ -1,4 +1,5 @@
 vim.wo.relativenumber = true
+vim.api.nvim_set_option_value("colorcolumn", "80", {})
 
 ---@type ChadrcConfig 
 local M = {}
