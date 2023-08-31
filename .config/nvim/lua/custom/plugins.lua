@@ -1,23 +1,42 @@
 local overrides = require("custom.configs.overrides")
 
 local plugins = {
+  -- Mason Config
   {
-    "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "black",
+        "debugpy",
+        "mypy",
+        "ruff",
+        "pyright",
+      },
+    },
   },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    config = function (_, opts)
-      vim.cmd[[hi! link IndentBlanklineContextStart NormalFloat]]
-      vim.cmd[[hi IndentBlanklineContextStart cterm=underline]]
 
-      require('indent_blankline').setup(opts)
-    end
+  -- LSP Tools & such
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require "plugins.configs.lspconfig"
+      require "custom.configs.lspconfig"
+    end,
   },
   {
-    "nvim-treesitter/nvim-treesitter-context",
-    -- TODO: Do not load explicitly
-    lazy = false,
+    "jose-elias-alvarez/null-ls.nvim",
+    ft = {"python"},
+    opts = function()
+      return require "custom.configs.null-ls"
+    end,
+  },
+
+  -- Debuugger tools
+  {
+    "mfussenegger/nvim-dap",
+    config = function(_, opts)
+      require("core.utils").load_mappings("dap")
+    end
   },
   {
     "rcarriga/nvim-dap-ui",
@@ -29,18 +48,6 @@ local plugins = {
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
       end
-      -- dap.listeners.before.event_terminated["dapui_config"] = function()
-      --   dapui.close()
-      -- end
-      -- dap.listeners.before.event_exited["dapui_config"] = function()
-      --   dapui.close()
-      -- end
-    end
-  },
-  {
-    "mfussenegger/nvim-dap",
-    config = function(_, opts)
-      require("core.utils").load_mappings("dap")
     end
   },
   {
@@ -56,31 +63,29 @@ local plugins = {
       require("core.utils").load_mappings("dap_python")
     end,
   },
+
+  -- Code context highligting 
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = {"python"},
-    opts = function()
-      return require "custom.configs.null-ls"
-    end,
+    "lukas-reineke/indent-blankline.nvim",
+    config = function (_, opts)
+      require("core.utils").load_mappings("blankline")
+      require('indent_blankline').setup(opts)
+    end
   },
   {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "black",
-        "debugpy",
-        "mypy",
-        "ruff",
-        "pyright",
-      },
-    },
-  },
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
+    "nvim-treesitter/nvim-treesitter-context",
+    init = function ()
+      require("core.utils").lazy_load "nvim-treesitter-context"
     end,
+    config = function ()
+      require("treesitter-context").setup()
+    end,
+  },
+
+  -- Other packages
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = overrides.nvimtree,
   },
 }
 return plugins
