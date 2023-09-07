@@ -27,6 +27,7 @@ alias vpn="sudo openvpn"
 
 alias l="ls -la"
 alias cat="bat"
+alias catraw="/bin/cat"
 alias hx="helix"
 
 export EDITOR="nvim"
