@@ -7,9 +7,6 @@
 -- Global variables
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.g.netrw_winsize = 20
-vim.g.netrw_banner = 0
-vim.g.netrw_keepdir = 0
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -157,7 +154,10 @@ require('lazy').setup({
       },
     },
   },
-
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -212,6 +212,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Relative numbers
+vim.o.relativenumber = 1;
+
 -- Tab-related
 vim.o.tabstop = 4
 vim.o.expandtab = true
@@ -229,7 +232,6 @@ vim.keymap.set('v', '<leader>p', '"_dP', { desc = "Pastet w/o yank", silent = tr
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-vim.keymap.set('n', '<c-n>', "<cmd>Lex<cr>", { silent = true })
 vim.keymap.set('n', '<leader>x', "<cmd>bd <cr>", { silent = true, desc = "Close current buffer" })
 
 -- [[ Highlight on yank ]]
@@ -247,9 +249,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   pickers = {
-    find_files = {
+  },
+  extensions = {
+    file_browser = {
       hidden = true,
+      grouped = true,
+      auto_depth = true,
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
     },
+    mappings = {
+      ["i"] = {
+        ["<C-t>"] = require "telescope.actions".select_tab,
+      },
+    }
   },
   defaults = {
     mappings = {
@@ -276,10 +289,10 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sf', require('telescope').extensions.file_browser.file_browser, { desc = '[S]earch [F]iles (file browser)',})
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- [[ Configure Treesitter ]]
@@ -413,10 +426,10 @@ end
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- gopls = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+  
+  rust_analyzer = {},
+  tsserver = {},
   clangd = {},
   pyright = {
     python = {
