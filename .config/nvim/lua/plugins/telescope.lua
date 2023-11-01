@@ -14,7 +14,7 @@ return {
         build = 'make',
         cond = function()
           return vim.fn.executable 'make' == 1
-        end,
+        end
       },
     },
     config = function()
@@ -24,12 +24,13 @@ return {
         },
         extensions = {
           file_browser = {
-            hidden = true,
-            grouped = true,
-            auto_depth = true,
-            respect_gitignore = true,
+            hidden = false,
+            auto_depth = false,
+
             -- disables netrw and use telescope-file-browser in its place
             hijack_netrw = true,
+            follow_symlinks = true,
+            cwd_to_path = true,
           },
           mappings = {
             ["i"] = {

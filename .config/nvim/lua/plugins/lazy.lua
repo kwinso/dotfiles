@@ -47,11 +47,11 @@ require('lazy').setup({
         },
     },
 
-  require("plugins.null_ls"),
-  require("plugins.debug"),
-  require("plugins.gitsigns"),
-  require("plugins.lsp"),
-  require("plugins.cmp"),
+    require("plugins.null_ls"),
+    require("plugins.debug"),
+    require("plugins.gitsigns"),
+    require("plugins.lsp"),
+    require("plugins.cmp"),
 
     -- Custom plugins
     { import = 'plugins.telescope' },

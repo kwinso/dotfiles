@@ -70,7 +70,24 @@ return {
     { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
     -- Additional lua configuration, makes nvim stuff amazing!
-    'folke/neodev.nvim',
+    {
+      'folke/neodev.nvim',
+      config = function()
+        require('neodev').setup()
+
+        -- Ensure lua_ls knows about global "vim" variable
+        require('lspconfig').lua_ls.setup({
+          settings = {
+            Lua = {
+              diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { 'vim' },
+              },
+            },
+          },
+        })
+      end
+    },
     -- Automatically install LSPs to stdpath for neovim
     {
       'williamboman/mason.nvim',
