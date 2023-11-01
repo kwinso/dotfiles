@@ -1,17 +1,5 @@
 [colors]
-;background = ${xrdb:color0:#222}
-; background = #121212
-; background-alt = #272727
-; foreground = #dbdbdb
-; primary = #7b4eed
-; secondary = #7b4eed
-; black = #000000
-; THEMER
-background = #282828
-foreground = #bdae93
-foreground_alt = #FF79C6
-; THEMER_END
-
+include-file = $HOME/.config/polybar/colors.ini
 
 [bar/top]
 width = 100%

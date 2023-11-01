@@ -1,9 +1,10 @@
 icons_format = "{icon}"
 
 [theme]
-theme = "semi-native"
+theme = "ctp-mocha"
 [theme.overrides]
-idle_fg = "#ffffff"
+separator = ""
+idle_bg = ""
 
 [icons]
 icons = "awesome6"
@@ -47,10 +48,11 @@ format_alt = " $icon  via $device "
 
 [[block]]
 block = "battery"
-format = " $icon  $percentage "
+format = " $icon  $percentage ($power) "
 full_format = " $icon  $percentage "
 not_charging_format = " $icon  $percentage "
 empty_format = " $icon Empty! "
+
 
 [[block]]
 block = "temperature"
@@ -67,12 +69,12 @@ interval = 1
 button = "left"
 cmd = "xkb-switch -n"
 
-[[block]]
-block = "custom"
-command = "sh ~/.config/i3status-rust/scripts/playerctl.sh"
-format = " $text.str(w:18,rot_interval:0.5) "
-hide_when_empty = true
-interval = 3
+# [[block]]
+# block = "custom"
+# command = "sh ~/.config/i3status-rust/scripts/playerctl.sh"
+# format = " $text.str(w:18,rot_interval:0.5) "
+# hide_when_empty = true
+# interval = 3
 
 [[block]]
 block = "sound"

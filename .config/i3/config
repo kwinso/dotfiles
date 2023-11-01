@@ -179,7 +179,7 @@ set $aqua #689d68
 set $gray #a89984
 
 # THEMER
-set $background #24283b
+set $background #1E1E2EA0
 set $background_alt #292e42
 set $foreground #c0caf5
 set $foreground_alt #9d7cd8
@@ -193,14 +193,15 @@ client.unfocused        $background_alt $background_alt $foreground $purple $for
 client.urgent           $red $red $white $red $red
 
 bar {
+        i3bar_command i3bar --transparency
 	status_command i3status-rs
 	position top
-    	font pango:JetBrains Mono Nerd Font, FontAwesome 11
+    	font pango:JetBrains Mono Nerd Font, FontAwesome 10
 	colors {
 		background $background	
 		#                  border     inner bg        fg
 		focused_workspace $background $foreground $background
-        inactive_workspace $background $background $foreground
+                inactive_workspace $background $background $foreground
 	}
 }
 
@@ -264,8 +265,6 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%- # descrease
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 
 # Discord intergration for web services
-exec --no-startup-id permid 
-exec --no-startup-id copyq
 exec --no-startup-id dropbox
 exec --no-startup-id telegram-desktop
 # exec --no-startup-id conky -c ~/.config/conky/conky.conf
@@ -275,14 +274,12 @@ exec --no-startup-id flameshot
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 # User Binds
 # +=+=+=+=+=+=+=+=+=+=+=+=+
-# ROFI
-#bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 bindsym $mod+d exec dmenu_run \
-	-nb '$background_alt' \
+	-nb '#1E1E2E' \
 	-nf '$foreground' \
-	-sb '$background' \
+	-sb '$background_alt' \
 	-sf '$foreground_alt' \
-	-fn "JetBrains Mono Nerd Font:pixelsize=18" \
+	-fn "JetBrains Mono Nerd Font:pixelsize=17" \
 	-p "dmenu"
 
 # Screenshots
@@ -291,13 +288,7 @@ bindsym Shift + Print exec flameshot full -c
 
 # bindsym Print exec gscreenshot -c -s
 # bindsym Control+Print exec gscreenshot
-bindsym Control+Shift+Print exec obs --minimize-to-tray --startrecording
+# bindsym Control+Shift+Print exec obs --minimize-to-tray --startrecording
 
 bindsym $mod+Control+l exec betterlockscreen -l
 exec --no-startup-id betterlockscreen -w -q 
-
-
-# +=+=+=+=+=+=+=+=+=+=+=+=+
-# Make sure that polybar is restarted with i3 restart
-# +=+=+=+=+=+=+=+=+=+=+=+=+
-# exec_always ~/.config/polybar/launch.sh
