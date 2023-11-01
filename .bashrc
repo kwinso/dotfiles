@@ -28,6 +28,7 @@ alias vpn="sudo openvpn"
 alias l="ls -la"
 alias cat="bat"
 alias catraw="/bin/cat"
+alias dco="docker compose"
 alias hx="helix"
 
 export EDITOR="nvim"
@@ -36,6 +37,6 @@ export TERM="xterm-256color"
 
 set -o vi
 shopt -s autocd
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
 
 eval "$(thefuck --alias)"
