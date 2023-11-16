@@ -26,14 +26,33 @@ require('lazy').setup({
     'tpope/vim-sleuth',
 
     -- "gc" to comment visual regions/lines
-    'numToStr/Comment.nvim',
-    -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-
     {
+        'numToStr/Comment.nvim',
+        opts = {
+            -- add any options here
+        },
+        lazy = false,
     },
 
+    -- Useful plugin to show you pending keybinds.
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require('which-key').register()
+        end,
+    },
 
+    {
+        "olexsmir/gopher.nvim",
+        ft = "go",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+    },
     {
         -- Add indentation guides even on blank lines
         'lukas-reineke/indent-blankline.nvim',
@@ -52,6 +71,7 @@ require('lazy').setup({
     require("plugins.gitsigns"),
     require("plugins.lsp"),
     require("plugins.cmp"),
+    require("plugins.treesitter"),
 
     -- Custom plugins
     { import = 'plugins.telescope' },

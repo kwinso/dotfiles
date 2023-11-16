@@ -15,7 +15,7 @@ return {
   },
   {
     -- Set lualine as statusline
-    'nvim-lualinek/lualine.nvim',
+    'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
       options = {

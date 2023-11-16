@@ -1,3 +1,5 @@
+local languages = require("lsp_packages").treesitter
+
 return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
@@ -8,10 +10,9 @@ return {
   config = function()
     -- [[ Configure Treesitter ]]
     -- See `:help nvim-treesitter`
-    require('nvim-treesitter.configs').setup {
-
+    require('nvim-treesitter.configs').setup({
       -- Add languages to be installed here that you want installed for treesitter
-      ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim' },
+      ensure_installed = languages,
       modules = {},
       ignore_install = {},
 
@@ -74,6 +75,6 @@ return {
           },
         },
       },
-    }
+    })
   end
 }

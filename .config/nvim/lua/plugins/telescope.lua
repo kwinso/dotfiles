@@ -20,17 +20,21 @@ return {
     config = function()
       local ts_actions = require "telescope.actions"
       require("telescope").setup {
-        pickers = {
-        },
         extensions = {
           file_browser = {
-            hidden = false,
-            auto_depth = false,
+            grouped = true,
+            files = true,
+            hidden = true,
+            depth = false,
+            auto_depth = true,
+            hide_parent_dir = true,
+            collapse_dirs = true,
+            respect_gitignore = true,
+            follow_symlinks = true,
+            cwd_to_path = true,
 
             -- disables netrw and use telescope-file-browser in its place
             hijack_netrw = true,
-            follow_symlinks = true,
-            cwd_to_path = true,
           },
           mappings = {
             ["i"] = {
