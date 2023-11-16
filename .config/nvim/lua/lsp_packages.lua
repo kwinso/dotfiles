@@ -1,6 +1,25 @@
 return {
     servers = {
-        gopls = {},
+        -- I feel bad for this
+        phpactor = {},
+
+        svelte = {
+            svelte = { plugin = { svelte = { defaultScriptLanguage = "ts" } } }
+        },
+
+        eslint = {},
+
+        gopls = {
+            settings = {
+                gopls = {
+                    analyses = {
+                        unusedparams = true,
+                    },
+                    staticcheck = true,
+                    gofumpt = true,
+                },
+            },
+        },
         html = { filetypes = { 'html', 'twig', 'hbs' } },
 
         rust_analyzer = {},
@@ -27,5 +46,11 @@ return {
         black = {},
         ruff = {},
         mypy = {},
-    }
+
+        --  JS tools
+        prettier = {},
+    },
+
+    treesitter = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
+        "svelte" }
 }

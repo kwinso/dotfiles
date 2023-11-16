@@ -40,3 +40,8 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- [[ gopher.nvim ]]
+vim.keymap.set('n', "<leader>gsj", "<cmd>GoTagAdd json <CR>", { desc = "Add [G]o [S]truct [J]son fields" })
+vim.keymap.set('n', "<leader>gsy", "<cmd>GoTagAdd yaml <CR>", { desc = "Add [G]o [S]truct [Y]aml fields" })
+vim.keymap.set('n', "<leader>ge", "<cmd>GoIfErr <CR>", { desc = "Add [G]o if-[E]rr block" })
