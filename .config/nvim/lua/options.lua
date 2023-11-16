@@ -42,5 +42,6 @@ vim.o.termguicolors = true
 -- Relative numbers
 vim.o.relativenumber = true;
 
+vim.o.tabstop = 4
 -- Tab-related
-vim.o.shiftwidth = 2
+vim.o.shiftwidth = 4
