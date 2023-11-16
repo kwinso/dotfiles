@@ -40,3 +40,7 @@ shopt -s autocd
 # . "$HOME/.cargo/env"
 
 eval "$(thefuck --alias)"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
