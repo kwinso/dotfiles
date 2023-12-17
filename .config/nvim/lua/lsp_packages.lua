@@ -1,7 +1,11 @@
 return {
     servers = {
         -- I feel bad for this
-        phpactor = {},
+        phpactor = {
+            language_server_php_cs_fixer = {
+                enabled = true
+            }
+        },
 
         svelte = {
             svelte = { plugin = { svelte = { defaultScriptLanguage = "ts" } } }
@@ -49,6 +53,9 @@ return {
 
         --  JS tools
         prettier = {},
+
+        -- PHP tools
+        pint = {},
     },
 
     treesitter = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',

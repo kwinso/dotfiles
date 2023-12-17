@@ -22,22 +22,21 @@ return {
       require("telescope").setup {
         extensions = {
           file_browser = {
-            grouped = true,
             files = true,
             hidden = true,
             depth = false,
-            auto_depth = true,
             hide_parent_dir = true,
             collapse_dirs = true,
             respect_gitignore = true,
             follow_symlinks = true,
+            add_dirs = false,
             cwd_to_path = true,
 
             -- disables netrw and use telescope-file-browser in its place
             hijack_netrw = true,
           },
           mappings = {
-            ["i"] = {
+            i = {
               ["<C-t>"] = ts_actions.select_tab,
             },
           }
@@ -46,11 +45,14 @@ return {
           mappings = {
             i = {
               ['<C-u>'] = false,
-              ['<C-d>'] = false,
               -- Swap next & back bind becuase it'll not go to the last item in telescope file browser
               ["<C-n>"] = ts_actions.move_selection_previous,
               ["<C-p>"] = ts_actions.move_selection_next,
+              ["<C-d>"] = ts_actions.delete_buffer,
             },
+            n = {
+              ["D"] = ts_actions.delete_buffer,
+            }
           },
         },
       }

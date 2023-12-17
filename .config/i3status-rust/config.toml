@@ -49,9 +49,9 @@ format_alt = " $icon  via $device "
 [[block]]
 block = "battery"
 format = " $icon  $percentage ($power) "
-full_format = " $icon  $percentage "
-not_charging_format = " $icon  $percentage "
-empty_format = " $icon Empty! "
+full_format = " $icon  ($power) "
+not_charging_format = " $icon  $percentage ($power) "
+empty_format = " $icon  $percentage ($power) "
 
 
 [[block]]

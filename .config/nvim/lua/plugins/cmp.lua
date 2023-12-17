@@ -19,7 +19,10 @@ return {
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
     require('luasnip.loaders.from_vscode').lazy_load()
-    luasnip.config.setup {}
+    luasnip.config.setup {
+      region_check_events = 'InsertEnter',
+      delete_check_events = 'InsertLeave'
+    }
 
     -- lua: ignore
     cmp.setup {

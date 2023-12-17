@@ -290,5 +290,5 @@ bindsym Shift + Print exec flameshot full -c
 # bindsym Control+Print exec gscreenshot
 # bindsym Control+Shift+Print exec obs --minimize-to-tray --startrecording
 
-bindsym $mod+Control+l exec betterlockscreen -l
+bindsym $mod+Control+l exec betterlockscreen -l --show-layout
 exec --no-startup-id betterlockscreen -w -q 
