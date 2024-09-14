@@ -7,6 +7,8 @@ return {
             }
         },
 
+        elixirls = {},
+
         svelte = {
             svelte = { plugin = { svelte = { defaultScriptLanguage = "ts" } } }
         },
@@ -59,5 +61,5 @@ return {
     },
 
     treesitter = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
-        "svelte" }
+        "svelte", 'elixir' }
 }
