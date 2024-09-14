@@ -11,20 +11,34 @@ icons = "awesome6"
 
 [[block]]
 block = "custom"
-format = " yay: $text "
-command = "yay -Sy; yay -Qu | wc -l"
-# once in 3 hours
-interval = 10800
+command = "sh ~/.config/i3status-rust/scripts/playerctl.sh"
+format = " $text.str(max_w:22,rot_interval:0.5) "
+hide_when_empty = true
+interval = 3
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+# [[block]]
+# block = "custom"
+# format = " yay: $text "
+# command = "yay -Sy; yay -Qu | wc -l"
+# # once in 3 hours
+# interval = 10800
 
 [[block]]
 block = "cpu"
 format = " CPU: $utilization "
 
 
-[[block]]
-block = "memory"
-format = " MEM: $mem_used_percents.eng(w:2) "
-format_alt = " $icon $swap_used_percents.eng(w:2) (SWP) "
+# [[bloc<S-D-R>]]
+# block = "memory"
+# format = " MEM: $mem_used_percents.eng(w:2) "
+# format_alt = " $icon $swap_used_percents.eng(w:2) (SWP) "
 
 [[block]]
 block = "disk_space"
@@ -32,7 +46,7 @@ path = "/"
 interval = 20
 warning = 20.0
 alert = 10.0
-format = " $icon root: $used.eng(w:2)/$total.eng(w:2) "
+format = " $icon $used.eng(w:2)/$total.eng(w:2) "
 
 
 [[block]]
@@ -43,15 +57,15 @@ format = " bri: $brightness "
 
 [[block]]
 block = "net"
-format = " $icon  {$signal_strength $ssid| Wired connection} "
+format = " $icon  {$signal_strength} "
 format_alt = " $icon  via $device "
 
 [[block]]
 block = "battery"
-format = " $icon  $percentage ($power) "
-full_format = " $icon  ($power) "
-not_charging_format = " $icon  $percentage ($power) "
-empty_format = " $icon  $percentage ($power) "
+format = " $icon  $percentage "
+full_format = " $icon "
+not_charging_format = " $icon  $percentage "
+empty_format = " $icon  $percentage "
 
 
 [[block]]
@@ -68,20 +82,6 @@ interval = 1
 [[block.click]]
 button = "left"
 cmd = "xkb-switch -n"
-
-# [[block]]
-# block = "custom"
-# command = "sh ~/.config/i3status-rust/scripts/playerctl.sh"
-# format = " $text.str(w:18,rot_interval:0.5) "
-# hide_when_empty = true
-# interval = 3
-
-[[block]]
-block = "sound"
-driver = "pulseaudio"
-[[block.click]]
-button = "left"
-cmd = "pavucontrol"
 
 [[block]]
 block = "time"

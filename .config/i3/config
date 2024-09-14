@@ -214,6 +214,8 @@ for_window [class="eva-player"] floating toggle
 for_window [class="Gnome-calculator"] floating toggle
 for_window [class="copyq"] floating toggle 
 for_window [class="Gscreenshot"] floating toggle 
+for_window [class="firefox" window_role="alert"] floating enable
+no_focus [window_role="alert"]
 
 # +=+=+=+=+=+=+=+=+=+=+=+=+=+=
 # Attach windows to workspaces 
@@ -221,6 +223,7 @@ for_window [class="Gscreenshot"] floating toggle
 for_window [class="firefox"] move to workspace $ws1
 for_window [class="discord"] move to workspace $ws9
 for_window [class="TelegramDesktop"] move to workspace $ws9
+for_window [class="Slack"] move to workspace $ws9
 for_window [class="Spotify"] move to workspace $ws10
 for_window [class="Code"] move to workspace $ws3
 for_window [class="KeePassXC"] move to workspace $ws4
@@ -241,10 +244,9 @@ exec xinput set-prop "ELAN0412:01 04F3:3240 Touchpad" "libinput Tapping Enabled"
 # +=+=+=+=+=+=+=+=+=+=+=+=+
 
 # Playerctl binds
-bindsym Prior exec playerctl previous
-bindsym Home exec playerctl play-pause
-bindsym End exec playerctl play-pause
-bindsym Next exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
 
 # Volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
@@ -283,8 +285,8 @@ bindsym $mod+d exec dmenu_run \
 	-p "dmenu"
 
 # Screenshots
-bindsym Print exec flameshot gui
-bindsym Shift + Print exec flameshot full -c
+bindsym $mod+Shift+S  exec flameshot gui
+# bindsym exec flameshot full -c
 
 # bindsym Print exec gscreenshot -c -s
 # bindsym Control+Print exec gscreenshot
