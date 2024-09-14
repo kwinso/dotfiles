@@ -15,21 +15,15 @@ alias gg="lazygit"
 
 # GO Path
 export PATH=$(go env GOPATH)/bin:$PATH
+export PATH=/opt/intellij-idea/bin:$PATH
 
-# CTF Vars
-export CTF_ROOT="/home/mouse/ctf"
-export HTB="$CTF_ROOT/htb"
-export THM="$CTF_ROOT/thm"
-
-alias htbd="cd $HTB"
-alias thmd="cd $THM"
 alias vpn="sudo openvpn"
 
 alias l="ls -la"
 alias cat="bat"
 alias catraw="/bin/cat"
 alias dco="docker compose"
-alias hx="helix"
+alias d="docker"
 
 export EDITOR="nvim"
 export TERMINAL="alacritty"
@@ -52,3 +46,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
