@@ -70,7 +70,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,11 +91,8 @@ fi
 ## Custom Exports ##
 # Term
 export TERM="xterm-256color"
-export TERMINAL="alacritty"
 # GO Path
 export PATH=$(go env GOPATH)/bin:$PATH
-export PATH=/opt/intellij-idea/bin:$PATH
-
 
 
 # Weird hack to force zsh to actually reset the `gg` alias
@@ -104,9 +101,10 @@ unalias gg
 alias gg="lazygit"
 
 # pnpm
-export PNPM_HOME="/home/mouse/.local/share/pnpm"
+export PNPM_HOME="/home/kwinso/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+eval "$(zellij setup --generate-auto-start zsh)"
