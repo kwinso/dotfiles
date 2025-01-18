@@ -699,14 +699,21 @@ require('lazy').setup({
         else
           lsp_format_opt = 'fallback'
         end
+
+        local increased_timeout = { php = true } -- hella slow shit
+        local timeout_ms = 500
+        if increased_timeout[vim.bo[bufnr].filetype] then
+          timeout_ms = 1500
+        end
+
         return {
-          timeout_ms = 500,
+          timeout_ms = timeout_ms,
           lsp_format = lsp_format_opt,
         }
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        php = { 'pint' },
+        php = { 'pint' }, -- hella slow shit
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
